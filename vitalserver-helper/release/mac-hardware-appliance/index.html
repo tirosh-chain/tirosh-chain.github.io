@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        <link rel="canonical" href="https://tirosh-chain.github.io/vitalserver-helper/release/mac-hardware-appliance/">
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>Why Mac Hardware - Vital Server Helper</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../css/brands.min.css" rel="stylesheet">
+        <link href="../../css/solid.min.css" rel="stylesheet">
+        <link href="../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../..">Vital Server Helper</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle active" aria-current="page" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Release</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../" class="dropdown-item">Overview</a>
+</li>
+                                    
+<li>
+    <a href="../background/" class="dropdown-item">Research Background</a>
+</li>
+                                    
+<li>
+    <a href="./" class="dropdown-item active" aria-current="page">Why Mac Hardware</a>
+</li>
+                                    
+<li>
+    <a href="../health-check-service/" class="dropdown-item">Vital Server Helper Health Check</a>
+</li>
+                                    
+<li>
+    <a href="../deployment-modes/" class="dropdown-item">Deployment Modes</a>
+</li>
+                                    
+<li>
+    <a href="../installation/" class="dropdown-item">Installation</a>
+</li>
+                                    
+<li>
+    <a href="../operation/" class="dropdown-item">Operation</a>
+</li>
+                                    
+<li>
+    <a href="../troubleshooting/" class="dropdown-item">Troubleshooting</a>
+</li>
+                                    
+<li>
+    <a href="../release-notes/" class="dropdown-item">Release Notes</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Dev</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../dev/" class="dropdown-item">Overview</a>
+</li>
+                                    
+<li>
+    <a href="../../dev/service-catalog/" class="dropdown-item">Service Catalog</a>
+</li>
+                                    
+<li>
+    <a href="../../dev/package-map/" class="dropdown-item">Package Map</a>
+</li>
+                                    
+<li>
+    <a href="../../dev/architecture/" class="dropdown-item">Architecture</a>
+</li>
+                                    
+<li>
+    <a href="../../dev/health-check-contract/" class="dropdown-item">Health Check Contract</a>
+</li>
+                                    
+<li>
+    <a href="../../dev/api-contracts/" class="dropdown-item">API Contracts</a>
+</li>
+                                    
+<li>
+    <a href="../../dev/build-and-release/" class="dropdown-item">Build and Release</a>
+</li>
+                                    
+<li>
+    <a href="../../dev/testing/" class="dropdown-item">Testing</a>
+</li>
+                                    
+<li>
+    <a href="../../dev/troubleshooting/" class="dropdown-item">Troubleshooting</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../background/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../health-check-service/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="https://github.com/tirosh-chain/tirosh-vitalserver/edit/master/docs/release/mac-hardware-appliance.md" class="nav-link">Edit on tirosh-chain/tirosh-vitalserver
+                                    </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#why-mac-hardware" class="nav-link">Why Mac Hardware</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#_1" class="nav-link">핵심 주장</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#_2" class="nav-link">선택 이유</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#_3" class="nav-link">경계</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#os" class="nav-link">OS의 역할</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="why-mac-hardware">Why Mac Hardware<a class="headerlink" href="#why-mac-hardware" title="Permanent link">&para;</a></h1>
+<p>Vital Server Helper의 1차 현장 appliance는 Mac mini/Mac Studio 계열 하드웨어를
+기준으로 합니다.</p>
+<p>이 선택의 주된 이유는 macOS가 아니라 Mac 하드웨어의 QA 일관성, 표준화, 장기
+호환성입니다.</p>
+<h2 id="_1">핵심 주장<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>Vital Server Helper는 병원 내부망에서 장기간 켜져 있는 현장 appliance를 목표로
+합니다. 일반 Linux/Windows PC는 제조사와 부품 조합이 다양해 현장별 검증 범위가
+커질 수 있습니다. 반면 Mac 기반 표준 장비는 설치, 검증, 교체, 장애 대응 절차를
+좁힐 수 있습니다.</p>
+<h2 id="_2">선택 이유<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>이유</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>하드웨어 QA 일관성</td>
+<td>Apple은 설계, 제조, 펌웨어, 전원, 열, 부품 조합을 통합 관리합니다. 현장 장비 편차와 하드웨어 품질 리스크를 줄이는 데 유리합니다.</td>
+</tr>
+<tr>
+<td>표준화된 하드웨어 SKU</td>
+<td>제조사, 메인보드, BIOS/UEFI, 전원부, 네트워크 칩셋 조합이 다양한 일반 PC보다 검증 대상을 제한하기 쉽습니다.</td>
+</tr>
+<tr>
+<td>검증 범위 축소</td>
+<td>Mac mini/Mac Studio 계열로 배포 target을 제한하면 설치, 네트워크, update, 교체 절차를 같은 하드웨어 기준으로 반복 검증할 수 있습니다.</td>
+</tr>
+<tr>
+<td>24/7 소형 appliance</td>
+<td>24시간 상시 운영 가능한 일반 PC는 대개 rack/server class로 올라갑니다. Mac mini/Mac Studio는 작은 크기로 병원 내부망 가까이에 둘 수 있습니다.</td>
+</tr>
+<tr>
+<td>장기 제품 호환성</td>
+<td>동일 계열 제품의 호환성과 지원 기간이 길어 현장 설치물과 runtime 검증 결과를 오래 유지하기 쉽습니다.</td>
+</tr>
+<tr>
+<td>낮은 운영 부담</td>
+<td>서버랙, 별도 전산실, 복잡한 하드웨어 조달 없이 표준 장비 교체와 재설치 절차를 단순화할 수 있습니다.</td>
+</tr>
+<tr>
+<td>저전력 장기 운영</td>
+<td>Apple Silicon 기반 Mac mini/Mac Studio는 전력 대비 성능이 좋아 24시간 상시 운영 비용을 줄이는 데 도움이 됩니다.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="_3">경계<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<p>Mac 하드웨어가 모든 서버 요구에 더 적합하다는 뜻은 아닙니다.</p>
+<p>중앙 인프라, 대규모 HA, redundant PSU, ECC memory, hot-swap storage, IPMI/iDRAC
+class 원격 관리, rack mounting, server vendor SLA가 핵심 요구라면 전통적인
+server 또는 industrial PC가 더 적합할 수 있습니다.</p>
+<p>Vital Server Helper의 Mac 선택 논리는 그 요구를 부정하지 않습니다. 병원 내부망
+가까이에 둘 표준 소형 현장 appliance라는 범위에서 Mac 하드웨어가 적합하다는
+주장입니다.</p>
+<h2 id="os">OS의 역할<a class="headerlink" href="#os" title="Permanent link">&para;</a></h2>
+<p>macOS 자체는 주된 선택 이유가 아닙니다. macOS는 Mac 하드웨어 위에서 host runtime,
+local proxy, packaging, Helper app을 구동하기 위한 운영 환경입니다.</p>
+<p>Linux VM, PWA, host별 VM provider 같은 구현 구조는 dev 문서에서 설명합니다.</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js"></script>
+        <script src="../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
