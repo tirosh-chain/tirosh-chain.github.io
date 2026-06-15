@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://tirosh-chain.github.io/vitalserver-helper/dev/runtime-contracts/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Runtime Contracts - Vital Server Helper</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Runtime Contracts";
+        var mkdocs_page_input_path = "dev/runtime-contracts.md";
+        var mkdocs_page_url = "/vitalserver-helper/dev/runtime-contracts/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Vital Server Helper
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Release</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../release/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../release/usage/">Usage</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../release/clean-uninstall/">Clean Uninstall</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../release/reset-installer/">Reset Installer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../release/scope/">Support Scope</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../release/runtime-status/">Runtime Status</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../release/observability-events/">Observability Events</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Dev</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../architecture/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Runtime Contracts</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#1">1. 왜 필요한가</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#1-1">1-1. 같은 단어를 같은 뜻으로 쓰기</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#1-2-ui">1-2. UI가 상태를 만들지 않기</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#2">2. 상태 단어</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#2-1">2-1. 섞으면 안 되는 상태</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#2-2">2-2. 문서에 남겨야 하는 것</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#2-3">2-3. 운영자가 보게 되는 차이</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#3-host-guest-operation">3. Host와 Guest operation 계약</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#3-1-host-time">3-1. Host time</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#3-2-guest-shutdown-result">3-2. Guest shutdown result</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#4-recorder-bed">4. Recorder와 Bed 상태</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#4-1">4-1. 예시</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#5-vital">5. .vital 파일 상태</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#6">6. 누가 상태를 말하나</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#6-1">6-1. 상태 소유권 예시</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#7-api">7. API가 맡는 일</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#7-1-swagger-ui">7-1. Swagger UI로 확인하기</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#7-2-runtime-control-api">7-2. Runtime Control API</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#7-3-recorder-observer-api">7-3. Recorder Observer API</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#7-4-audit-proxy-api">7-4. Audit Proxy API</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#7-5-vital-server-api">7-5. Vital Server API</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#8">8. 작성 규칙</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../backup-restore-contracts/">Backup/Restore 계약</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../repository-map/">Repository Map</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../delivery-validation/">Delivery & Validation</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Vital Server Helper</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Dev</li>
+      <li class="breadcrumb-item active">Runtime Contracts</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/tirosh-chain/tirosh-vitalserver/edit/master/docs/dev/runtime-contracts.md">Edit on tirosh-chain/tirosh-vitalserver</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="runtime-contracts">Runtime Contracts<a class="headerlink" href="#runtime-contracts" title="Permanent link">&para;</a></h1>
+<p>Runtime contract는 Helper와 UI가 상태를 같은 뜻으로 이해하기 위한 약속입니다.</p>
+<p>이 문서는 API 형식 자체보다 “상태를 어떻게 말할 것인가”를 먼저 설명합니다. Helper는 상태를
+추측하지 않습니다. 상태를 아는 쪽이 명시적으로 말하고, 다른 쪽은 그 상태를 읽고 표시합니다.</p>
+<h2 id="1">1. 왜 필요한가<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
+<p>운영 화면에서 가장 위험한 것은 모르는 상태를 정상처럼 보이게 만드는 것입니다. 파일을 읽지
+못한 상황, 값이 없는 상황, 오래된 상황, 실제로 비어 있는 상황은 모두 다르게 다뤄야 합니다.</p>
+<h3 id="1-1">1-1. 같은 단어를 같은 뜻으로 쓰기<a class="headerlink" href="#1-1" title="Permanent link">&para;</a></h3>
+<p>Runtime Control API, Helper app, PWA, test, 문서는 같은 상태 단어를 같은 뜻으로 써야 합니다.
+예를 들어 <code>missing</code>은 필요한 정보가 없다는 뜻이고, <code>failed</code>는 읽거나 확인하는 과정이 실패했다는
+뜻입니다. 둘은 서로 바꿀 수 없습니다.</p>
+<h3 id="1-2-ui">1-2. UI가 상태를 만들지 않기<a class="headerlink" href="#1-2-ui" title="Permanent link">&para;</a></h3>
+<p>UI는 상태를 보여주는 곳입니다. UI가 “값이 없으니 정상일 것이다” 또는 “읽지 못했지만 비어
+있을 것이다”라고 판단하지 않습니다. UI는 API가 준 상태를 사람에게 읽기 좋게 표시합니다.</p>
+<h2 id="2">2. 상태 단어<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
+<p>아래 단어는 Helper 전반에서 같은 뜻으로 사용합니다.</p>
+<table>
+<thead>
+<tr>
+<th>상태</th>
+<th>뜻</th>
+<th>예시</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ok</code></td>
+<td>확인 대상이 명시적으로 정상으로 확인됨</td>
+<td>runtime status를 읽었고 service가 healthy로 보고됨</td>
+</tr>
+<tr>
+<td><code>missing</code></td>
+<td>필요한 상태, 파일, field가 없음</td>
+<td><code>runtime-status.json</code> 파일이 아직 생성되지 않음</td>
+</tr>
+<tr>
+<td><code>invalid</code></td>
+<td>값이나 문서 모양이 약속과 맞지 않음</td>
+<td>JSON은 있지만 필수 field 타입이 맞지 않음</td>
+</tr>
+<tr>
+<td><code>failed</code></td>
+<td>읽기, 해석, 권한, 의존 service 호출이 실패함</td>
+<td>파일 권한 문제로 status를 읽지 못함</td>
+</tr>
+<tr>
+<td><code>stale</code></td>
+<td>상태는 있지만 최신 상태로 보기 어려움</td>
+<td>마지막 recorder activity가 기준 시간을 넘김</td>
+</tr>
+<tr>
+<td><code>empty</code></td>
+<td>정상적으로 읽었고 결과가 비어 있음</td>
+<td>recorder 목록을 정상적으로 읽었지만 항목이 없음</td>
+</tr>
+</tbody>
+</table>
+<h3 id="2-1">2-1. 섞으면 안 되는 상태<a class="headerlink" href="#2-1" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>구분</th>
+<th>이유</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>missing</code>과 <code>empty</code></td>
+<td>없음과 “읽었는데 비어 있음”은 다름</td>
+</tr>
+<tr>
+<td><code>failed</code>와 <code>empty</code></td>
+<td>읽기 실패를 빈 결과로 처리하면 장애가 숨겨짐</td>
+</tr>
+<tr>
+<td><code>stale</code>과 <code>ok</code></td>
+<td>오래된 정상은 현재 정상과 다름</td>
+</tr>
+<tr>
+<td><code>invalid</code>와 <code>missing</code></td>
+<td>값이 잘못된 것과 값이 없는 것은 조치가 다름</td>
+</tr>
+</tbody>
+</table>
+<h3 id="2-2">2-2. 문서에 남겨야 하는 것<a class="headerlink" href="#2-2" title="Permanent link">&para;</a></h3>
+<p>상태를 만들거나 읽는 코드는 실패 이유를 가능한 한 보존해야 합니다. 권한 문제, decode 실패,
+의존 service 실패, 파일 없음은 서로 다른 조치가 필요합니다.</p>
+<table>
+<thead>
+<tr>
+<th>상황</th>
+<th>남겨야 하는 정보</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>파일 없음</td>
+<td>어떤 파일이나 상태가 없었는지</td>
+</tr>
+<tr>
+<td>권한 실패</td>
+<td>어떤 경로에서 어떤 권한 문제가 있었는지</td>
+</tr>
+<tr>
+<td>decode 실패</td>
+<td>어떤 문서가 어떤 이유로 해석되지 않았는지</td>
+</tr>
+<tr>
+<td>의존 service 실패</td>
+<td>어떤 service나 endpoint 호출이 실패했는지</td>
+</tr>
+<tr>
+<td>오래된 상태</td>
+<td>마지막으로 관측된 시간이 언제인지</td>
+</tr>
+</tbody>
+</table>
+<h3 id="2-3">2-3. 운영자가 보게 되는 차이<a class="headerlink" href="#2-3" title="Permanent link">&para;</a></h3>
+<p>상태 단어가 다르면 안내도 달라져야 합니다.</p>
+<table>
+<thead>
+<tr>
+<th>상태</th>
+<th>화면에서의 방향</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>missing</code></td>
+<td>아직 생성되지 않았거나 설치/초기화가 끝나지 않았을 수 있음을 알림</td>
+</tr>
+<tr>
+<td><code>failed</code></td>
+<td>로그 export나 권한/연결 문제 확인을 안내</td>
+</tr>
+<tr>
+<td><code>stale</code></td>
+<td>마지막 관측 시간과 recorder/network 확인을 안내</td>
+</tr>
+<tr>
+<td><code>empty</code></td>
+<td>정상적으로 읽었지만 현재 항목이 없음을 안내</td>
+</tr>
+<tr>
+<td><code>invalid</code></td>
+<td>Helper와 runtime contract version 또는 문서 손상을 확인하도록 안내</td>
+</tr>
+</tbody>
+</table>
+<h2 id="3-host-guest-operation">3. Host와 Guest operation 계약<a class="headerlink" href="#3-host-guest-operation" title="Permanent link">&para;</a></h2>
+<p>Host는 runtime/process/filesystem state를 소유하고, Guest는 Host가 제공한 explicit contract만
+소비합니다. Guest 내부 상태를 Host가 로그나 파일 부재로 추정하지 않습니다.</p>
+<h3 id="3-1-host-time">3-1. Host time<a class="headerlink" href="#3-1-host-time" title="Permanent link">&para;</a></h3>
+<p>Guest clock은 Host-owned <code>host-time.json</code> contract에서 동기화합니다. Guest는 boot 초기에
+<code>tirosh-vitalserver-sync-host-time.service</code>로 이 값을 적용한 뒤 Docker, runtime-state,
+observability, compose service를 시작합니다.</p>
+<table>
+<thead>
+<tr>
+<th>상태</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>host time contract missing</td>
+<td>Host가 Guest boot input을 제공하지 못함</td>
+</tr>
+<tr>
+<td>host time contract invalid</td>
+<td>Guest가 contract를 해석할 수 없음</td>
+</tr>
+<tr>
+<td>host time sync failed</td>
+<td>Guest가 명시 시각 적용에 실패함</td>
+</tr>
+</tbody>
+</table>
+<p>UI나 observer는 timestamp를 현재 시간으로 보정하지 않습니다. 시간이 틀리면 Host/Guest time contract
+문제로 보고 failure reason과 logs를 확인합니다.</p>
+<h3 id="3-2-guest-shutdown-result">3-2. Guest shutdown result<a class="headerlink" href="#3-2-guest-shutdown-result" title="Permanent link">&para;</a></h3>
+<p>Update나 VM restart가 Guest shutdown preparation을 요구하면 Host는 request를 쓰고 Guest의 typed result를
+기다립니다. request가 남아 있거나 log가 없다는 사실만으로 pending/success를 추정하지 않습니다.</p>
+<table>
+<thead>
+<tr>
+<th>상태</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>request missing</td>
+<td>Host가 아직 operation을 요청하지 않았거나 cleanup이 끝남</td>
+</tr>
+<tr>
+<td>result missing</td>
+<td>Guest worker가 실행되지 않았거나 result를 쓰기 전에 실패함</td>
+</tr>
+<tr>
+<td>result failed</td>
+<td>Guest가 실패 reason과 details를 명시적으로 보고함</td>
+</tr>
+<tr>
+<td>result stale</td>
+<td>requestId 또는 updatedAt이 현재 operation과 맞지 않음</td>
+</tr>
+<tr>
+<td>result ready</td>
+<td>Guest가 shutdown preparation과 poweroff request를 완료함</td>
+</tr>
+</tbody>
+</table>
+<p><code>prepare-update-shutdown-result.json</code>의 failure details에는 실패 service, 남은 service 목록,
+service state snapshot, snapshot path가 포함될 수 있습니다. Host와 UI는 이 details를 표시하거나
+전달하고, 로그를 해석해서 다른 상태로 바꾸지 않습니다.</p>
+<h2 id="4-recorder-bed">4. Recorder와 Bed 상태<a class="headerlink" href="#4-recorder-bed" title="Permanent link">&para;</a></h2>
+<p>Recorder와 Bed 상태는 관측 결과를 기반으로 표시합니다. Host나 UI가 임의로 만들지 않습니다.</p>
+<table>
+<thead>
+<tr>
+<th>상태</th>
+<th>뜻</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>observed</td>
+<td>recorder identity와 최근 activity가 명시적으로 관측됨</td>
+</tr>
+<tr>
+<td>missing</td>
+<td>기대한 recorder가 관측되지 않음</td>
+</tr>
+<tr>
+<td>stale</td>
+<td>최근 activity가 기준 시간을 넘김</td>
+</tr>
+<tr>
+<td>read-failed</td>
+<td>observer나 runtime 상태를 읽지 못함</td>
+</tr>
+<tr>
+<td>invalid</td>
+<td>recorder 문서 모양이 약속과 맞지 않음</td>
+</tr>
+</tbody>
+</table>
+<p>Recorder/bed activity는 runtime status와 같은 줄에서 만들어지는 상태가 아닙니다. Observer와
+조회용 상태가 제공한 관측 결과를 Runtime Control API가 읽고 화면에 전달합니다.</p>
+<h3 id="4-1">4-1. 예시<a class="headerlink" href="#4-1" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>상황</th>
+<th>표시해야 하는 상태</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Recorder activity가 최근 기준 안에 들어옴</td>
+<td>observed</td>
+</tr>
+<tr>
+<td>기대한 recorder가 최신 관측에 없음</td>
+<td>missing</td>
+</tr>
+<tr>
+<td>마지막 activity가 기준 시간을 넘김</td>
+<td>stale</td>
+</tr>
+<tr>
+<td>observer 저장소를 읽지 못함</td>
+<td>read-failed</td>
+</tr>
+<tr>
+<td>recorder 문서에 필요한 값이 없거나 타입이 맞지 않음</td>
+<td>invalid</td>
+</tr>
+</tbody>
+</table>
+<p>Recorder가 보이지 않는다고 해서 곧바로 missing으로 만들지 않습니다. 관측 자료를 정상적으로
+읽었는지 먼저 구분해야 합니다. 관측 자료 자체를 읽지 못했다면 missing이 아니라 read-failed입니다.</p>
+<h2 id="5-vital">5. <code>.vital</code> 파일 상태<a class="headerlink" href="#5-vital" title="Permanent link">&para;</a></h2>
+<p><code>.vital</code> file sanity check는 지원 예정 기능입니다. 아래 상태는 향후 file check를 추가할 때
+현재 runtime model과 같은 실패 의미를 유지하기 위한 기준입니다.</p>
+<table>
+<thead>
+<tr>
+<th>상태</th>
+<th>뜻</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>found</td>
+<td><code>.vital</code> 파일을 명시적으로 발견</td>
+</tr>
+<tr>
+<td>empty</td>
+<td>파일 탐색이 성공했고 결과가 비어 있음</td>
+</tr>
+<tr>
+<td>invalid-filename</td>
+<td>파일명이 upload 규칙과 맞지 않음</td>
+</tr>
+<tr>
+<td>zero-size</td>
+<td>파일이 0 byte</td>
+</tr>
+<tr>
+<td>read-failed</td>
+<td>파일 또는 directory 읽기 실패</td>
+</tr>
+<tr>
+<td>permission-failed</td>
+<td>권한 문제로 접근 실패</td>
+</tr>
+<tr>
+<td>decode-failed</td>
+<td>파일 내용을 해석하지 못함</td>
+</tr>
+</tbody>
+</table>
+<p>파일 탐색 실패는 empty가 아닙니다. 권한 실패는 파일 없음이 아닙니다. decode 실패는
+invalid filename과 다릅니다.</p>
+<h2 id="6">6. 누가 상태를 말하나<a class="headerlink" href="#6" title="Permanent link">&para;</a></h2>
+<p>상태는 소유자가 말해야 합니다. 다른 layer는 그 상태를 읽고 전달하거나 표시합니다.</p>
+<table>
+<thead>
+<tr>
+<th>영역</th>
+<th>상태를 말하는 쪽</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Recorder/Bed 관측</td>
+<td>Recorder Observer / runtime 조회용 상태</td>
+</tr>
+<tr>
+<td><code>.vital</code> file discovery</td>
+<td>지원 예정 file reader / testkit policy</td>
+</tr>
+<tr>
+<td>runtime service health</td>
+<td>Host runtime / watchdog</td>
+</tr>
+<tr>
+<td>guest service state</td>
+<td>guest tools</td>
+</tr>
+<tr>
+<td>화면 표시</td>
+<td>PWA / Helper app presentation</td>
+</tr>
+</tbody>
+</table>
+<p>화면 표시 layer는 상태를 생성하지 않습니다. 화면은 명시 상태를 포맷하고 표시합니다.</p>
+<h3 id="6-1">6-1. 상태 소유권 예시<a class="headerlink" href="#6-1" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>질문</th>
+<th>답해야 하는 쪽</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>VM이 실행 중인가?</td>
+<td>Host runtime</td>
+</tr>
+<tr>
+<td>guest service가 healthy인가?</td>
+<td>guest tools가 만든 상태와 Host runtime</td>
+</tr>
+<tr>
+<td>recorder가 최근 데이터를 보냈는가?</td>
+<td>Recorder Observer / 조회용 상태</td>
+</tr>
+<tr>
+<td>update가 실패했는가?</td>
+<td>update workflow와 runtime event</td>
+</tr>
+<tr>
+<td>화면에 어떤 색으로 보일 것인가?</td>
+<td>PWA / Helper app presentation</td>
+</tr>
+</tbody>
+</table>
+<p>화면은 마지막 질문만 답합니다. 앞의 상태 질문을 화면이 직접 판단하기 시작하면 같은 runtime을
+PWA와 Helper app에서 다르게 해석할 위험이 생깁니다.</p>
+<h2 id="7-api">7. API가 맡는 일<a class="headerlink" href="#7-api" title="Permanent link">&para;</a></h2>
+<p>API는 상태를 추측하는 곳이 아니라, 상태를 전달하는 통로입니다. 각 API는 자신이 맡은 범위의
+request, response, failure state를 분명히 해야 합니다.</p>
+<h3 id="7-1-swagger-ui">7-1. Swagger UI로 확인하기<a class="headerlink" href="#7-1-swagger-ui" title="Permanent link">&para;</a></h3>
+<p>API 문서는 OpenAPI 파일로 관리하고, 개발 중에는 Swagger UI로 확인할 수 있습니다.</p>
+<pre><code class="language-sh">make swagger/up
+</code></pre>
+<p>이후 <code>http://localhost:8082</code>에서 Swagger UI를 열면 Vital Server, Runtime Control API,
+Audit Proxy API spec을 선택해서 볼 수 있습니다.</p>
+<p>설치된 runtime에서는 Helper app의 Swagger UI 항목 또는 <code>http://127.0.0.1:&lt;proxy-port&gt;/swagger/</code>
+경로로 guest에서 제공하는 Swagger UI를 확인합니다.</p>
+<h3 id="7-2-runtime-control-api">7-2. Runtime Control API<a class="headerlink" href="#7-2-runtime-control-api" title="Permanent link">&para;</a></h3>
+<p>Runtime Control API는 UI와 Host runtime 사이의 기본 약속입니다.</p>
+<p>PWA와 Helper app은 observer container나 Guest 내부를 직접 읽지 않습니다. Runtime Control API가
+제공하는 runtime status, runtime events, recorder/bed activity를 읽고 표시합니다.</p>
+<table>
+<thead>
+<tr>
+<th>문서 파일</th>
+<th>역할</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>docs/runtime/macos/runtime-control.openapi.json</code></td>
+<td>PWA/Helper app과 Host runtime 사이의 API</td>
+</tr>
+</tbody>
+</table>
+<h3 id="7-3-recorder-observer-api">7-3. Recorder Observer API<a class="headerlink" href="#7-3-recorder-observer-api" title="Permanent link">&para;</a></h3>
+<p>Recorder Observer API는 Redis와 proxy/access log를 읽어 recorder observation snapshot을 만듭니다.
+이 API는 내부 collector API입니다. 최종 product-facing 상태는 runtime 조회용 상태와
+Runtime Control API를 통해 전달합니다.</p>
+<table>
+<thead>
+<tr>
+<th>문서 파일</th>
+<th>역할</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>docs/api/vitaldb-observer.openapi.yaml</code></td>
+<td>observer container 내부 API</td>
+</tr>
+</tbody>
+</table>
+<h3 id="7-4-audit-proxy-api">7-4. Audit Proxy API<a class="headerlink" href="#7-4-audit-proxy-api" title="Permanent link">&para;</a></h3>
+<p>Audit Proxy API는 VRecorder command 흐름과 audit event를 관측하기 위한 sidecar API입니다.</p>
+<table>
+<thead>
+<tr>
+<th>문서 파일</th>
+<th>역할</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>docs/api/audit-proxy.openapi.yaml</code></td>
+<td>command audit sidecar endpoint</td>
+</tr>
+</tbody>
+</table>
+<h3 id="7-5-vital-server-api">7-5. Vital Server API<a class="headerlink" href="#7-5-vital-server-api" title="Permanent link">&para;</a></h3>
+<p>Vital Server API 문서는 Vital Server integration surface를 기록하기 위한 reference입니다.</p>
+<table>
+<thead>
+<tr>
+<th>문서 파일</th>
+<th>역할</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>docs/api/vitalserver.openapi.yaml</code></td>
+<td>Vital Server integration surface reference</td>
+</tr>
+</tbody>
+</table>
+<h2 id="8">8. 작성 규칙<a class="headerlink" href="#8" title="Permanent link">&para;</a></h2>
+<ul>
+<li>API 문서에는 request, response, failure state를 구분해서 적습니다.</li>
+<li>read failure를 empty success로 표현하지 않습니다.</li>
+<li>stale state와 missing state를 구분합니다.</li>
+<li>UI fallback은 display label 수준으로 제한합니다.</li>
+<li>상태 단어를 바꿀 때는 관련 test와 release/dev 문서를 함께 확인합니다.</li>
+</ul>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../architecture/" class="btn btn-neutral float-left" title="Architecture"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../backup-restore-contracts/" class="btn btn-neutral float-right" title="Backup/Restore 계약">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/tirosh-chain/tirosh-vitalserver" class="fa fa-code-fork" style="color: #fcfcfc"> tirosh-chain/tirosh-vitalserver</a>
+        </span>
+    
+    
+      <span><a href="../architecture/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../backup-restore-contracts/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

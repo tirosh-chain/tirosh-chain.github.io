@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://tirosh-chain.github.io/vitalserver-helper/release/scope/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Support Scope - Vital Server Helper</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Support Scope";
+        var mkdocs_page_input_path = "release/scope.md";
+        var mkdocs_page_url = "/vitalserver-helper/release/scope/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Vital Server Helper
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Release</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../usage/">Usage</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../clean-uninstall/">Clean Uninstall</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../reset-installer/">Reset Installer</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Support Scope</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#1">1. 지원 대상</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#2">2. 현재 제공하는 것</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#3">3. 포함 구성 요소</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#4">4. 아직 제공하지 않는 것</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#5">5. 지원 예정 방향</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../runtime-status/">Runtime Status</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../observability-events/">Observability Events</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Dev</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../dev/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../dev/architecture/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../dev/runtime-contracts/">Runtime Contracts</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../dev/backup-restore-contracts/">Backup/Restore 계약</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../dev/repository-map/">Repository Map</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../dev/delivery-validation/">Delivery & Validation</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Vital Server Helper</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Release</li>
+      <li class="breadcrumb-item active">Support Scope</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/tirosh-chain/tirosh-vitalserver/edit/master/docs/release/scope.md">Edit on tirosh-chain/tirosh-vitalserver</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="support-scope">Support Scope<a class="headerlink" href="#support-scope" title="Permanent link">&para;</a></h1>
+<p>이 문서는 Vital Server Helper가 현재 무엇을 지원하고, 무엇을 지원 예정으로 두는지 정리합니다.</p>
+<h2 id="1">1. 지원 대상<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
+<p>Vital Server Helper는 VitalServer 운영을 보조하는 별도 계층입니다. VitalServer 원 프로젝트와
+공식 배포물을 대체하지 않습니다.</p>
+<table>
+<thead>
+<tr>
+<th>대상</th>
+<th>Helper에서의 관계</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>VitalServer</td>
+<td>runtime 상태 확인과 운영 보조 대상</td>
+</tr>
+<tr>
+<td>Vital Recorder / VRecorder</td>
+<td>연결 상태와 activity 관측 대상</td>
+</tr>
+<tr>
+<td>Bed</td>
+<td>recorder와의 관계와 activity 관측 대상</td>
+</tr>
+<tr>
+<td><code>.vital</code> 파일</td>
+<td>향후 sanity check 대상</td>
+</tr>
+<tr>
+<td>Helper runtime</td>
+<td>상태 확인, update, repair, log 수집을 제공하는 보조 계층</td>
+</tr>
+</tbody>
+</table>
+<p>VitalServer, Vital Recorder, VRecorder 관련 이름과 권리는 각 원 소유자에게 있습니다.</p>
+<h2 id="2">2. 현재 제공하는 것<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
+<p>현재 현장 검증 범위는 “VitalServer process를 실행한다”에서 끝나지 않습니다. 운영자가 상태를
+확인하고, 문제가 생겼을 때 지원 자료를 모을 수 있는지를 함께 봅니다.</p>
+<table>
+<thead>
+<tr>
+<th>운영자가 궁금해하는 질문</th>
+<th>현재 제공하는 것</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>runtime이 실행 중인가?</td>
+<td>Helper app과 runtime CLI의 상태 확인</td>
+</tr>
+<tr>
+<td>recorder activity가 보이는가?</td>
+<td>recorder observer와 audit proxy 기반 관측</td>
+</tr>
+<tr>
+<td>bed 관계를 볼 수 있는가?</td>
+<td>Beds 화면과 relationship history</td>
+</tr>
+<tr>
+<td>장애 조사 자료를 모을 수 있는가?</td>
+<td>status, event, logs, support 자료</td>
+</tr>
+<tr>
+<td>update 입력을 검증할 수 있는가?</td>
+<td>Product Update bundle verify/apply 흐름</td>
+</tr>
+<tr>
+<td>재설치가 막힌 Mac을 정리할 수 있는가?</td>
+<td>Reset for Reinstall command</td>
+</tr>
+<tr>
+<td>upstream Redis migration archive를 만들 수 있는가?</td>
+<td>Troubleshooting Tools의 upstream Redis backup command</td>
+</tr>
+</tbody>
+</table>
+<h2 id="3">3. 포함 구성 요소<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>구성 요소</th>
+<th>repository 위치</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>macOS Helper app</td>
+<td><code>apps/vitalserver-macos-runtime</code></td>
+</tr>
+<tr>
+<td>runtime CLI</td>
+<td><code>apps/vitalserver-macos-runtime</code>의 <code>vitalserver-vm</code> target</td>
+</tr>
+<tr>
+<td>Runtime Control PWA</td>
+<td><code>apps/vitalserver-runtime-pwa</code></td>
+</tr>
+<tr>
+<td>Recorder observer</td>
+<td><code>apps/vitaldb-observer</code></td>
+</tr>
+<tr>
+<td>Audit proxy</td>
+<td><code>apps/vitalserver-audit-proxy</code></td>
+</tr>
+<tr>
+<td>Testkit</td>
+<td>recorder simulation과 검증 도구 package</td>
+</tr>
+<tr>
+<td>Docs</td>
+<td><code>site-docs/</code> MkDocs 문서</td>
+</tr>
+</tbody>
+</table>
+<h2 id="4">4. 아직 제공하지 않는 것<a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
+<p>아래 항목은 현재 현장 검증 release에서 제공하는 기능이 아닙니다.</p>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>상태</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>.vital</code> 파일 sanity check</td>
+<td>지원 예정</td>
+</tr>
+<tr>
+<td>External VitalServer mode</td>
+<td>기존 VitalServer 연결 지원 예정</td>
+</tr>
+<tr>
+<td>Windows host installer</td>
+<td>release 범위 아님</td>
+</tr>
+<tr>
+<td>Linux host installer</td>
+<td>release 범위 아님</td>
+</tr>
+<tr>
+<td>공개 installer URL</td>
+<td>안정 release 준비 과정에서 확정</td>
+</tr>
+<tr>
+<td>checksum 배포</td>
+<td>안정 release 준비 과정에서 확정</td>
+</tr>
+<tr>
+<td>지원 OS matrix</td>
+<td>안정 release 준비 과정에서 확정</td>
+</tr>
+<tr>
+<td>병원별 rollout 절차</td>
+<td>field validation 이후 확정</td>
+</tr>
+<tr>
+<td>장기 운영 SLA</td>
+<td>별도 계약과 운영 정책에서 다룸</td>
+</tr>
+</tbody>
+</table>
+<h2 id="5">5. 지원 예정 방향<a class="headerlink" href="#5" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>단계</th>
+<th>내용</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>현장 검증 문서</td>
+<td>현재 설치, 상태 확인, 강제 정리, event 해석 흐름 정리</td>
+</tr>
+<tr>
+<td>Release artifact</td>
+<td>installer, checksum, 지원 OS, 알려진 제한 사항 고정</td>
+</tr>
+<tr>
+<td>External VitalServer mode</td>
+<td>기존 VitalServer와 Redis endpoint에 연결하고 Helper proxy/observer stack으로 관측</td>
+</tr>
+<tr>
+<td>Field validation</td>
+<td>병원별 네트워크, 저장 위치, 권한, 운영 절차 확인</td>
+</tr>
+<tr>
+<td>Operation docs</td>
+<td>실제 artifact와 일치하는 설치, 운영, rollback 문서 작성</td>
+</tr>
+</tbody>
+</table>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../reset-installer/" class="btn btn-neutral float-left" title="Reset Installer"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../runtime-status/" class="btn btn-neutral float-right" title="Runtime Status">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/tirosh-chain/tirosh-vitalserver" class="fa fa-code-fork" style="color: #fcfcfc"> tirosh-chain/tirosh-vitalserver</a>
+        </span>
+    
+    
+      <span><a href="../reset-installer/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../runtime-status/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://tirosh-chain.github.io/vitalserver-helper/dev/backup-restore-contracts/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Backup/Restore 계약 - Vital Server Helper</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Backup/Restore \uacc4\uc57d";
+        var mkdocs_page_input_path = "dev/backup-restore-contracts.md";
+        var mkdocs_page_url = "/vitalserver-helper/dev/backup-restore-contracts/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Vital Server Helper
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Release</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../release/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../release/usage/">Usage</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../release/clean-uninstall/">Clean Uninstall</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../release/reset-installer/">Reset Installer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../release/scope/">Support Scope</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../release/runtime-status/">Runtime Status</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../release/observability-events/">Observability Events</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Dev</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../architecture/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../runtime-contracts/">Runtime Contracts</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Backup/Restore 계약</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#1">1. 제품 표면</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#2-runtime-data-backup-artifact">2. Runtime Data Backup Artifact</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#3-compatibility-gate">3. Compatibility Gate</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#4-compatibility-version">4. Compatibility Version을 올리는 기준</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#5-redis-only-upstream-migration">5. Redis-only와 Upstream Migration</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#6">6. 문서화 규칙</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../repository-map/">Repository Map</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../delivery-validation/">Delivery & Validation</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Vital Server Helper</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Dev</li>
+      <li class="breadcrumb-item active">Backup/Restore 계약</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/tirosh-chain/tirosh-vitalserver/edit/master/docs/dev/backup-restore-contracts.md">Edit on tirosh-chain/tirosh-vitalserver</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="backuprestore">Backup/Restore 계약<a class="headerlink" href="#backuprestore" title="Permanent link">&para;</a></h1>
+<p>이 문서는 Vital Server Helper의 backup/restore 구현 계약을 정리합니다.
+Release <code>usage.md</code>는 운영자가 눌러야 하는 메뉴와 판단 순서를 다루고, 이 문서는
+artifact 구성, data schema owner, backup-level restore compatibility, migration tool의 구현 기준을 다룹니다.</p>
+<h2 id="1">1. 제품 표면<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>제품 표면</th>
+<th>내부 operation</th>
+<th>사용 목적</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>VitalServer backup</td>
+<td><code>runtime-data-backup</code></td>
+<td>Helper가 관리하는 runtime state와 Guest Redis data를 하나의 복구 단위로 backup/restore</td>
+</tr>
+<tr>
+<td>Automatic VitalServer backup</td>
+<td>Host launchd <code>automatic-backup</code></td>
+<td>Settings schedule에 따라 VitalServer backup을 자동 생성하고 보관 개수를 적용</td>
+</tr>
+<tr>
+<td>Redis-only recovery</td>
+<td>Redis backup/restore request</td>
+<td>VM disk repair, uninstall, migration, 장애 분석처럼 Redis data만 분리해야 하는 고급 조치</td>
+</tr>
+<tr>
+<td>Upstream Redis backup command</td>
+<td>Troubleshooting Tools command</td>
+<td>기존 upstream VitalServer Redis data directory를 Helper Redis-only import archive로 변환</td>
+</tr>
+</tbody>
+</table>
+<p>일반 운영자는 VitalServer backup을 사용합니다. Redis-only recovery는 전체 runtime 상태를 되돌리는
+기능이 아니라 Redis data만 바꾸는 repair 기능입니다.</p>
+<p>자동 backup도 Redis-only archive가 아니라 VitalServer backup을 생성합니다. Host launchd job
+<code>ai.tirosh.vitalserver.helper.automatic-backup</code>이 Settings의 <code>automaticBackupEnabled</code>,
+<code>backupScheduleTimes</code>, <code>backupRetentionCount</code>를 source of truth로 사용합니다. Schedule은 macOS
+local time <code>HH:mm</code> 값이며, Helper app process가 실행 중인지에 의존하지 않아야 합니다. Schedule
+time은 system timezone 기준으로 표시해야 하고, <code>03:15</code>, <code>15:15</code>처럼 24-hour <code>HH:mm</code> format만
+허용합니다. 유효 범위는 <code>00:00</code>부터 <code>23:59</code>까지이며, 같은 schedule time을 중복 저장하면 안 됩니다.</p>
+<p>Automatic backup command는 실행 시점에 runtime operation lease를 acquire합니다. 다른 mutating runtime
+operation이 active이면 실패 상태를 만들지 않고 해당 run을 skipped로 기록합니다. Backup 생성 성공 후
+<code>backups/vitalserver-helper</code> 아래의 오래된 VitalServer backup directory를 <code>backupRetentionCount</code>에
+맞춰 제거합니다. Retention은 Redis-only archive에는 적용하지 않습니다.</p>
+<h2 id="2-runtime-data-backup-artifact">2. Runtime Data Backup Artifact<a class="headerlink" href="#2-runtime-data-backup-artifact" title="Permanent link">&para;</a></h2>
+<p>VitalServer backup은 하나의 restore unit이지만 artifact마다 schema owner가 다릅니다.</p>
+<table>
+<thead>
+<tr>
+<th>Artifact</th>
+<th>Owner</th>
+<th>Schema owner</th>
+<th>Restore 대상</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>redis-data</code></td>
+<td>Guest</td>
+<td>VitalServer Redis key/value layout</td>
+<td>guest <code>redis-restore</code>를 통한 Redis Docker volume</td>
+</tr>
+<tr>
+<td><code>runtime-vm-config</code></td>
+<td>Host</td>
+<td>VM runtime config contract</td>
+<td>설치된 VM config document</td>
+</tr>
+<tr>
+<td><code>guest-runtime-config</code></td>
+<td>Host</td>
+<td>Guest deploy/runtime config contract</td>
+<td>배포된 guest runtime config document</td>
+</tr>
+<tr>
+<td><code>guest-runtime-settings</code></td>
+<td>Host</td>
+<td>Runtime settings contract</td>
+<td>runtime settings document</td>
+</tr>
+<tr>
+<td><code>proxy-launch-daemon-settings</code></td>
+<td>Host</td>
+<td>macOS launchd plist contract</td>
+<td>proxy LaunchDaemon plist</td>
+</tr>
+<tr>
+<td><code>start-on-boot-state</code></td>
+<td>Host</td>
+<td><code>RuntimeDataBackupStartOnBootStateDocument</code></td>
+<td>launchctl enabled/disabled state</td>
+</tr>
+<tr>
+<td><code>runtime-status-document</code></td>
+<td>Host</td>
+<td>Host runtime status document</td>
+<td>UI continuity용 optional state</td>
+</tr>
+<tr>
+<td><code>runtime-events-document</code></td>
+<td>Host</td>
+<td>Host runtime event JSONL contract</td>
+<td>UI continuity용 optional event history</td>
+</tr>
+<tr>
+<td><code>runtime-observability-database</code></td>
+<td>Host</td>
+<td>SQLite observability projection schema</td>
+<td>UI continuity용 optional projection snapshot</td>
+</tr>
+</tbody>
+</table>
+<p>Required recovery artifact는 Redis data, VM config, guest config, guest settings,
+proxy LaunchDaemon settings, start-on-boot state입니다. Status, events, observability
+SQLite는 optional continuity artifact입니다. Backup에 없으면 restore는 대체 상태를 만들지 않고
+required artifact만 복원합니다.</p>
+<h2 id="3-compatibility-gate">3. Compatibility Gate<a class="headerlink" href="#3-compatibility-gate" title="Permanent link">&para;</a></h2>
+<p>Restore는 runtime destination에 artifact를 쓰기 전에
+<code>RuntimeDataBackupManifest.restoreCompatibilityVersion</code>을 확인해야 합니다.</p>
+<p>Restore compatibility version은 backup unit 전체의 restore 계약입니다. 제품 <code>runtimeVersion</code>과
+같은 의미가 아니고, artifact마다 따로 관리하는 schema version도 아닙니다.
+Product version은 운영자 context를 위해 기록하지만, restore는 product version, filename,
+artifact 존재 여부, checksum 성공만으로 compatibility를 추정하면 안 됩니다.</p>
+<p>Restore는 아래 경우 backup을 거부합니다.</p>
+<ul>
+<li><code>restoreCompatibilityVersion</code>이 없음</li>
+<li>현재 Helper가 선언된 compatibility version을 지원하지 않음</li>
+<li>manifest schema, product, artifact identity validation 실패</li>
+<li>required artifact state, path, size, checksum validation 실패</li>
+</ul>
+<p>오래된 backup을 지원해야 한다면 restore가 파일을 쓰기 전에 명시 migration을 구현해야 합니다.
+Restore flow는 artifact 일부를 적용한 뒤 나중에 다른 artifact가 incompatible하다는 사실을 발견하면
+안 됩니다.</p>
+<p>이 문서가 도입된 compatibility baseline 이전 backup은 지원하지 않습니다. Legacy runtime-data backup
+kind/path/manifest를 추정해서 읽는 fallback을 추가하지 않습니다. 이후 버전에서 하위호환이 필요하면
+새 baseline의 <code>restoreCompatibilityVersion</code>을 기준으로 명시 migration을 작성합니다.</p>
+<h2 id="4-compatibility-version">4. Compatibility Version을 올리는 기준<a class="headerlink" href="#4-compatibility-version" title="Permanent link">&para;</a></h2>
+<p>이전 backup을 현재 runtime이 migration 없이 안전하게 restore할 수 없으면
+<code>RuntimeDataBackupCompatibility.currentRestoreCompatibilityVersion</code>을 올립니다.</p>
+<p>대표적인 bump 기준은 아래와 같습니다.</p>
+<ul>
+<li>현재 VitalServer가 old Redis data를 읽을 수 없을 정도로 Redis key/value layout이 변경됨</li>
+<li>VM config, guest runtime config, guest runtime settings에서 required field가 제거되거나 의미가 변경됨</li>
+<li>start-on-boot service label 또는 launchd plist 의미가 호환되지 않게 변경됨</li>
+<li><code>runtime-observability.sqlite</code> schema 변경으로 restored snapshot이 현재 read-only query path에서
+  안전하지 않거나 읽을 수 없음</li>
+</ul>
+<p>명시적인 missing-state 처리로 복원 가능한 additive optional field 때문에 compatibility version을
+올리면 안 됩니다. Missing, invalid, failed, stale, zero, empty는 서로 다른 의미로 유지해야 합니다.</p>
+<h2 id="5-redis-only-upstream-migration">5. Redis-only와 Upstream Migration<a class="headerlink" href="#5-redis-only-upstream-migration" title="Permanent link">&para;</a></h2>
+<p>Redis-only backup/restore는 Guest-owned 작업입니다. Host는 archive를 staging하거나 선택하고,
+typed request를 쓰고, typed result를 기다린 뒤 capability/read failure를 명시적으로 보고합니다.
+Host는 filename, log, Docker volume path로 Redis 내부 상태를 추정하지 않습니다.</p>
+<p>DMG Troubleshooting Tools의 <code>Create Upstream Redis Backup.command</code>는 기존 upstream VitalServer Redis
+data를 migration하기 위한 helper입니다. 이 command는 upstream Redis data directory를 입력받아
+Helper import용 <code>redis-upstream-import.tar.gz</code>를 만듭니다.</p>
+<p>Command는 archive를 만들기 전에 bundled Redis tooling으로 <code>SAVE</code>를 실행할 수 있습니다. <code>SAVE</code>는
+Redis를 중지하지 않지만 <code>dump.rdb</code>를 쓰는 동안 Redis를 잠깐 block할 수 있습니다. 자동 refresh를
+기다리되 무기한 대기하면 안 됩니다. Command는 기본 15초 timeout 안에 SAVE가 끝나지 않으면 실패로
+중단하고 helper process를 종료합니다. 자동 refresh를 건너뛰면 운영자는 data directory를 선택하기
+전에 upstream Redis에서 <code>SAVE</code>/<code>BGSAVE</code>를 실행하거나 Redis를 중지해 <code>dump.rdb</code>가 최신인지 확인해야
+합니다.</p>
+<p>생성된 upstream Redis archive는 Advanced -&gt; Recovery operations -&gt; Redis-only recovery -&gt;
+Import Backups로 가져온 뒤 Restore Redis-only Backup으로 복원합니다.</p>
+<p>Troubleshooting Tools command log는 현재 사용자 temp directory에 남깁니다.</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Log</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Reset for Reinstall</td>
+<td><code>tirosh-vitalserver-reset-for-reinstall.log</code></td>
+</tr>
+<tr>
+<td>Create Upstream Redis Backup</td>
+<td><code>tirosh-vitalserver-upstream-redis-backup.log</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="6">6. 문서화 규칙<a class="headerlink" href="#6" title="Permanent link">&para;</a></h2>
+<p>Backup/restore 동작이 바뀌면 아래 문서를 함께 갱신합니다.</p>
+<ul>
+<li>release usage 문서: 운영자가 보는 메뉴, 결과, 실패 안내</li>
+<li>이 dev 계약 문서: schema owner, compatibility, migration 의미</li>
+</ul>
+<p>반복되는 restore failure는 symptom, cause, fix direction, prevention을 갖춘 troubleshooting 문서로
+승격합니다. Restore 실패가 UI progress/message에 표시되지 않는 failure pattern은
+<a href="https://github.com/tirosh-chain/tirosh-vitalserver/blob/main/docs/troubleshooting/079_runtime-data-restore-silent-failure.md">TS-079</a>에 기록합니다.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../runtime-contracts/" class="btn btn-neutral float-left" title="Runtime Contracts"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../repository-map/" class="btn btn-neutral float-right" title="Repository Map">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/tirosh-chain/tirosh-vitalserver" class="fa fa-code-fork" style="color: #fcfcfc"> tirosh-chain/tirosh-vitalserver</a>
+        </span>
+    
+    
+      <span><a href="../runtime-contracts/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../repository-map/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

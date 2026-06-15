@@ -1,343 +1,263 @@
 <!DOCTYPE html>
-<html lang="en" data-bs-theme="light">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        
-        
-        <link rel="canonical" href="https://tirosh-chain.github.io/vitalserver-helper/release/">
-        <link rel="shortcut icon" href="../img/favicon.ico">
-        <title>Overview - Vital Server Helper</title>
-        <link href="../css/bootstrap.min.css" rel="stylesheet">
-        <link href="../css/fontawesome.min.css" rel="stylesheet">
-        <link href="../css/brands.min.css" rel="stylesheet">
-        <link href="../css/solid.min.css" rel="stylesheet">
-        <link href="../css/v4-font-face.min.css" rel="stylesheet">
-        <link href="../css/base.css" rel="stylesheet">
-        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
-        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
-        <script>hljs.highlightAll();</script> 
-    </head>
-
-    <body>
-        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
-            <div class="container">
-                <a class="navbar-brand" href="..">Vital Server Helper</a>
-                <!-- Expander button -->
-                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <!-- Expanded navigation -->
-                <div id="navbar-collapse" class="navbar-collapse collapse">
-                        <!-- Main navigation -->
-                        <ul class="nav navbar-nav">
-                            <li class="nav-item">
-                                <a href=".." class="nav-link">Home</a>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle active" aria-current="page" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Release</a>
-                                <ul class="dropdown-menu">
-                                    
-<li>
-    <a href="./" class="dropdown-item active" aria-current="page">Overview</a>
-</li>
-                                    
-<li>
-    <a href="background/" class="dropdown-item">Research Background</a>
-</li>
-                                    
-<li>
-    <a href="mac-hardware-appliance/" class="dropdown-item">Why Mac Hardware</a>
-</li>
-                                    
-<li>
-    <a href="health-check-service/" class="dropdown-item">Vital Server Helper Health Check</a>
-</li>
-                                    
-<li>
-    <a href="deployment-modes/" class="dropdown-item">Deployment Modes</a>
-</li>
-                                    
-<li>
-    <a href="installation/" class="dropdown-item">Installation</a>
-</li>
-                                    
-<li>
-    <a href="operation/" class="dropdown-item">Operation</a>
-</li>
-                                    
-<li>
-    <a href="troubleshooting/" class="dropdown-item">Troubleshooting</a>
-</li>
-                                    
-<li>
-    <a href="release-notes/" class="dropdown-item">Release Notes</a>
-</li>
-                                </ul>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Dev</a>
-                                <ul class="dropdown-menu">
-                                    
-<li>
-    <a href="../dev/" class="dropdown-item">Overview</a>
-</li>
-                                    
-<li>
-    <a href="../dev/service-catalog/" class="dropdown-item">Service Catalog</a>
-</li>
-                                    
-<li>
-    <a href="../dev/package-map/" class="dropdown-item">Package Map</a>
-</li>
-                                    
-<li>
-    <a href="../dev/architecture/" class="dropdown-item">Architecture</a>
-</li>
-                                    
-<li>
-    <a href="../dev/health-check-contract/" class="dropdown-item">Health Check Contract</a>
-</li>
-                                    
-<li>
-    <a href="../dev/api-contracts/" class="dropdown-item">API Contracts</a>
-</li>
-                                    
-<li>
-    <a href="../dev/build-and-release/" class="dropdown-item">Build and Release</a>
-</li>
-                                    
-<li>
-    <a href="../dev/testing/" class="dropdown-item">Testing</a>
-</li>
-                                    
-<li>
-    <a href="../dev/troubleshooting/" class="dropdown-item">Troubleshooting</a>
-</li>
-                                </ul>
-                            </li>
-                        </ul>
-
-                    <ul class="nav navbar-nav ms-md-auto">
-                        <li class="nav-item">
-                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
-                                <i class="fa fa-search"></i> Search
-                            </a>
-                        </li>
-                            <li class="nav-item">
-                                <a rel="prev" href=".." class="nav-link">
-                                    <i class="fa fa-arrow-left"></i> Previous
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a rel="next" href="background/" class="nav-link">
-                                    Next <i class="fa fa-arrow-right"></i>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="https://github.com/tirosh-chain/tirosh-vitalserver/edit/master/docs/release/index.md" class="nav-link">Edit on tirosh-chain/tirosh-vitalserver
-                                    </a>
-                            </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <div class="container">
-            <div class="row">
-                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
-    <div class="navbar-header">
-        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
-            <span class="fa fa-angle-down"></span>
-        </button>
-    </div>
-
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://tirosh-chain.github.io/vitalserver-helper/release/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Overview - Vital Server Helper</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
     
-    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
-        <ul class="nav flex-column">
-            
-            <li class="nav-item" data-bs-level="1"><a href="#vital-server-helper" class="nav-link">Vital Server Helper</a>
-              <ul class="nav flex-column">
-            <li class="nav-item" data-bs-level="2"><a href="#_1" class="nav-link">제공 범위</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-bs-level="2"><a href="#_2" class="nav-link">지원 모드</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-bs-level="2"><a href="#_3" class="nav-link">다음 문서</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-              </ul>
-            </li>
-        </ul>
-    </div>
-</div></div>
-                    <div class="col-md-9" role="main">
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Overview";
+        var mkdocs_page_input_path = "release/index.md";
+        var mkdocs_page_url = "/vitalserver-helper/release/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
 
-<h1 id="vital-server-helper">Vital Server Helper<a class="headerlink" href="#vital-server-helper" title="Permanent link">&para;</a></h1>
-<p>Vital Server Helper는 병원 내부망에서 VitalServer를 장기간 운영하고, VRecorder
-연결 상태와 저장 데이터 상태를 확인하기 위한 현장 appliance 서비스입니다.</p>
-<p>이 문서군은 K-MFDB 구축을 위한 Vital Server Helper 공개/배포 설명을 다룹니다.
-내부 구현 세부 사항보다 병원 현장에서 무엇을 제공하고 어떻게 운영하는지에
-초점을 둡니다.</p>
-<h2 id="_1">제공 범위<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>Vital Server Helper는 아래 기능을 제공합니다.</p>
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> Vital Server Helper
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Release</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Overview</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#1">1. 무엇을 제공하나</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#1-1">1-1. 현재 문서의 범위</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#1-2">1-2. 문서 읽는 순서</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#2">2. 현재 설치 대상</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#3">3. 중요한 경계</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="usage/">Usage</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="clean-uninstall/">Clean Uninstall</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="reset-installer/">Reset Installer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="scope/">Support Scope</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="runtime-status/">Runtime Status</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="observability-events/">Observability Events</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Dev</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../dev/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../dev/architecture/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../dev/runtime-contracts/">Runtime Contracts</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../dev/backup-restore-contracts/">Backup/Restore 계약</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../dev/repository-map/">Repository Map</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../dev/delivery-validation/">Delivery & Validation</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Vital Server Helper</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Release</li>
+      <li class="breadcrumb-item active">Overview</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/tirosh-chain/tirosh-vitalserver/edit/master/docs/release/index.md">Edit on tirosh-chain/tirosh-vitalserver</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="vital-server-helper">Vital Server Helper<a class="headerlink" href="#vital-server-helper" title="Permanent link">&para;</a></h1>
+<p>Vital Server Helper는 VitalServer를 더 쉽게 운영하고 지원하기 위한 macOS Helper입니다.
+Helper app, runtime CLI, 관측 도구, update/repair 흐름, 문서를 함께 제공합니다.</p>
+<p>이 문서군은 현장 검증 단계에서 Helper를 설치하고, 상태를 확인하고, 문제가 생겼을 때 어떤
+자료를 전달해야 하는지 설명합니다.</p>
+<h2 id="1">1. 무엇을 제공하나<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
+<p>Vital Server Helper는 VitalServer 자체를 대체하지 않습니다. VitalServer 주변에서 운영자가
+확인해야 하는 상태와 지원 자료를 모으는 역할을 합니다.</p>
 <table>
 <thead>
 <tr>
-<th>범위</th>
-<th>설명</th>
+<th>확인하려는 것</th>
+<th>Helper가 제공하는 것</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>VitalServer 운영</td>
-<td>병원 내부망에서 VitalServer service를 장기간 실행</td>
+<td>runtime이 켜져 있는가</td>
+<td>Helper app과 Runtime Control API의 상태 화면</td>
 </tr>
 <tr>
-<td>Health Check</td>
-<td>VR/VRecorder 동작 유무와 <code>.vital</code> 저장 데이터 sanity check 확인</td>
+<td>recorder/bed activity가 보이는가</td>
+<td>Recorders/Beds 화면과 observability event</td>
 </tr>
 <tr>
-<td>운영 상태 확인</td>
-<td>서비스 상태, 로그, update 상태, 장애 징후 확인</td>
+<td>문제가 생겼을 때 자료를 모을 수 있는가</td>
+<td>logs, runtime event, support bundle</td>
 </tr>
 <tr>
-<td>병원 내 기본 모드</td>
-<td>외부 outbound 없이 병원 내부망에서 운영</td>
+<td>update를 적용할 수 있는가</td>
+<td>Product Update bundle 검증과 적용 흐름</td>
 </tr>
 <tr>
-<td>Cloud 선택 모드</td>
-<td>병원이 outbound를 허용하는 경우에만 외부 cloud 연계 추가 지원</td>
+<td>제거와 재설치 복구의 차이를 이해할 수 있는가</td>
+<td>Clean Uninstall and Reset for Reinstall</td>
+</tr>
+<tr>
+<td>재설치가 막힌 Mac을 정리할 수 있는가</td>
+<td>Reset for Reinstall command</td>
 </tr>
 </tbody>
 </table>
-<h2 id="_2">지원 모드<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<p>기본 지원 모드는 병원 내부망 운영입니다. Vital Server Helper 장비는 병원 내부망에
-위치하고, VRecorder와 운영자는 병원 내부 네트워크에서 접근합니다.</p>
-<p>병원이 outbound 연결을 허용하는 경우에는 cloud 연계 모드를 추가로 지원할 수
-있습니다. 이 모드는 병원 보안 정책, 개인정보 처리 기준, 네트워크 정책을 별도로
-확인한 뒤 적용합니다.</p>
-<h2 id="_3">다음 문서<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<h3 id="1-1">1-1. 현재 문서의 범위<a class="headerlink" href="#1-1" title="Permanent link">&para;</a></h3>
+<p>현재 release 문서는 macOS Helper 기반 현장 검증 흐름을 다룹니다. 공개 installer URL,
+checksum, 지원 OS matrix, 병원별 rollout 절차는 안정 release 준비 과정에서 별도 확정합니다.</p>
+<p>이 문서에서 설명하는 기본 실행 방식은 Helper-managed runtime입니다. 이미 운영 중인
+VitalServer에 연결하는 <code>External VitalServer mode</code>는 지원 예정 범위입니다.</p>
+<h3 id="1-2">1-2. 문서 읽는 순서<a class="headerlink" href="#1-2" title="Permanent link">&para;</a></h3>
+<p>처음 읽는다면 아래 순서가 좋습니다.</p>
+<ol>
+<li><a href="usage/">Usage</a>에서 설치 후 어떤 화면과 절차를 쓰는지 봅니다.</li>
+<li><a href="scope/">Support Scope</a>에서 현재 제공하는 범위와 지원 예정 범위를 확인합니다.</li>
+<li><a href="runtime-status/">Runtime Status</a>에서 Helper app 상태값의 의미를 봅니다.</li>
+<li><a href="observability-events/">Observability Events</a>에서 event와 anomaly를 해석합니다.</li>
+<li><a href="clean-uninstall/">Clean Uninstall and Reset for Reinstall</a>에서 내부 clean uninstall과 reset command의 차이를 봅니다.</li>
+<li><a href="reset-installer/">Reset for Reinstall command</a>는 재설치가 막혔을 때만 봅니다.</li>
+</ol>
+<h2 id="2">2. 현재 설치 대상<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
+<p>현재 현장 검증용 설치 대상은 macOS host입니다.</p>
 <table>
 <thead>
 <tr>
-<th>목적</th>
-<th>문서</th>
+<th>구분</th>
+<th>현재 범위</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>연구/배포 배경 이해</td>
-<td><a href="background/">Research Background</a></td>
+<td>host OS</td>
+<td>macOS</td>
 </tr>
 <tr>
-<td>Mac 하드웨어 기반 appliance 선택 이유</td>
-<td><a href="mac-hardware-appliance/">Why Mac Hardware</a></td>
+<td>설치 파일</td>
+<td>macOS Helper package</td>
 </tr>
 <tr>
-<td>Health Check 서비스 이해</td>
-<td><a href="health-check-service/">Vital Server Helper Health Check</a></td>
+<td>포함 실행물</td>
+<td>Helper app, <code>vitalserver-vm</code> runtime CLI</td>
 </tr>
 <tr>
-<td>병원 내/외 사용 모드 비교</td>
-<td><a href="deployment-modes/">Deployment Modes</a></td>
-</tr>
-<tr>
-<td>설치 흐름 확인</td>
-<td><a href="installation/">Installation</a></td>
-</tr>
-<tr>
-<td>운영 흐름 확인</td>
-<td><a href="operation/">Operation</a></td>
-</tr>
-<tr>
-<td>장애 대응 흐름 확인</td>
-<td><a href="troubleshooting/">Troubleshooting</a></td>
+<td>runtime 위치</td>
+<td>macOS host 위의 local VM/runtime</td>
 </tr>
 </tbody>
-</table></div>
+</table>
+<p>Windows host installer와 Linux host installer는 아직 release 범위가 아닙니다. 다만 구조상
+Host/Guest/PWA 경계를 나누고 있어, 이후 platform 확장을 별도 주제로 다룰 수 있게 설계합니다.</p>
+<h2 id="3">3. 중요한 경계<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
+<ul>
+<li>의료 행위나 임상 판단을 자동화하지 않습니다.</li>
+<li>VitalServer 원 프로젝트와 공식 배포물을 대체하지 않습니다.</li>
+<li>환자 데이터, 병원 내부 IP, 인증 정보, token, 로그 원문은 공개 GitHub issue에 올리지 않습니다.</li>
+<li>runtime 상태와 event는 운영 판단을 돕는 자료이며, 장애 원인 확정이나 임상 판단의 단독 근거가 아닙니다.</li>
+<li>안정 지원 계약, SLA, 보안 인증, 병원별 검수 완료는 별도 release 절차에서 확정합니다.</li>
+</ul>
+              
             </div>
-        </div>
-
-        <footer class="col-md-12">
-            <hr>
-            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
-        </footer>
-        <script src="../js/bootstrap.bundle.min.js"></script>
-        <script>
-            var base_url = "..",
-                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
-        </script>
-        <script src="../js/base.js"></script>
-        <script src="../search/main.js"></script>
-
-        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="searchModalLabel">Search</h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p>From here you can search these documents. Enter your search terms below.</p>
-                <form>
-                    <div class="form-group">
-                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
-                    </div>
-                </form>
-                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
-            </div>
-            <div class="modal-footer">
-            </div>
-        </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href=".." class="btn btn-neutral float-left" title="Home"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="usage/" class="btn btn-neutral float-right" title="Usage">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
-</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th style="width: 20%;">Keys</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td class="help shortcut"><kbd>?</kbd></td>
-                    <td>Open this help</td>
-                  </tr>
-                  <tr>
-                    <td class="next shortcut"><kbd>n</kbd></td>
-                    <td>Next page</td>
-                  </tr>
-                  <tr>
-                    <td class="prev shortcut"><kbd>p</kbd></td>
-                    <td>Previous page</td>
-                  </tr>
-                  <tr>
-                    <td class="search shortcut"><kbd>s</kbd></td>
-                    <td>Search</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="modal-footer">
-            </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
         </div>
-    </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/tirosh-chain/tirosh-vitalserver" class="fa fa-code-fork" style="color: #fcfcfc"> tirosh-chain/tirosh-vitalserver</a>
+        </span>
+    
+    
+      <span><a href=".." style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="usage/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
 </div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
 
-    </body>
+</body>
 </html>

@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://tirosh-chain.github.io/vitalserver-helper/release/runtime-status/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Runtime Status - Vital Server Helper</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Runtime Status";
+        var mkdocs_page_input_path = "release/runtime-status.md";
+        var mkdocs_page_url = "/vitalserver-helper/release/runtime-status/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Vital Server Helper
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Release</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../usage/">Usage</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../clean-uninstall/">Clean Uninstall</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../reset-installer/">Reset Installer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../scope/">Support Scope</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Runtime Status</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#1">1. 상태를 어떻게 읽나</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#1-1">1-1. 먼저 볼 화면</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#1-2">1-2. 섞으면 안 되는 상태</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#2-health">2. 전체 health</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#3-runtime-service">3. Runtime service</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#3-1-service">3-1. 표시되는 service</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#3-2-service">3-2. service 상태값</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#3-3-service-liveness-uptime">3-3. Service liveness uptime</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#4-recorder-bed">4. Recorder와 Bed</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#4-1-vrecorder">4-1. VRecorder 상태</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#4-2-bed">4-2. Bed 상태</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#4-3-stale-offline">4-3. Stale과 Offline을 볼 때</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#5">5. 읽기 실패</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#6-settings-critical">6. Settings 적용 뒤 Critical</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../observability-events/">Observability Events</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Dev</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../dev/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../dev/architecture/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../dev/runtime-contracts/">Runtime Contracts</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../dev/backup-restore-contracts/">Backup/Restore 계약</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../dev/repository-map/">Repository Map</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../dev/delivery-validation/">Delivery & Validation</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Vital Server Helper</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Release</li>
+      <li class="breadcrumb-item active">Runtime Status</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/tirosh-chain/tirosh-vitalserver/edit/master/docs/release/runtime-status.md">Edit on tirosh-chain/tirosh-vitalserver</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="runtime-status">Runtime Status<a class="headerlink" href="#runtime-status" title="Permanent link">&para;</a></h1>
+<p>Runtime Status는 Helper app에서 운영자가 보는 상태값의 의미를 설명합니다.</p>
+<p>상태값은 장애 원인을 확정하는 판정서가 아닙니다. 어느 화면을 먼저 확인해야 하는지 알려주는
+점검 정보입니다. 시간 순서와 원인 추적은 <a href="../observability-events/">Observability Events</a>에서
+확인합니다.</p>
+<h2 id="1">1. 상태를 어떻게 읽나<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
+<p>Helper app은 상태를 추측하지 않습니다. 상태 소스를 읽지 못하면 정상이나 빈 값으로 바꾸지 않고
+별도 오류로 표시합니다.</p>
+<h3 id="1-1">1-1. 먼저 볼 화면<a class="headerlink" href="#1-1" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>화면</th>
+<th>역할</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Status</td>
+<td>전체 health와 주요 연결 상태를 요약</td>
+</tr>
+<tr>
+<td>Recorders</td>
+<td>VRecorder activity와 bed 연결 상태를 표시</td>
+</tr>
+<tr>
+<td>Beds</td>
+<td>bed별 activity와 recorder 관계를 표시</td>
+</tr>
+<tr>
+<td>Advanced</td>
+<td>VM, service, operation, failure reason을 표시</td>
+</tr>
+<tr>
+<td>Observability</td>
+<td>상태 변화와 anomaly를 시간 순서로 표시</td>
+</tr>
+<tr>
+<td>Logs</td>
+<td>상세 log와 export 자료를 확인</td>
+</tr>
+</tbody>
+</table>
+<p>Status는 시작점입니다. 세부 원인은 Recorders, Beds, Advanced, Observability, Logs를 함께 봅니다.</p>
+<h3 id="1-2">1-2. 섞으면 안 되는 상태<a class="headerlink" href="#1-2" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>구분</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>missing</code></td>
+<td>필요한 상태나 문서가 없음</td>
+</tr>
+<tr>
+<td><code>failed</code></td>
+<td>읽기, 권한, 연결, 해석 과정이 실패함</td>
+</tr>
+<tr>
+<td><code>stale</code></td>
+<td>상태는 있지만 최신 상태로 보기 어려움</td>
+</tr>
+<tr>
+<td><code>empty</code></td>
+<td>정상적으로 읽었고 결과가 비어 있음</td>
+</tr>
+<tr>
+<td><code>invalid</code></td>
+<td>값이나 문서 모양이 약속과 맞지 않음</td>
+</tr>
+</tbody>
+</table>
+<p>예를 들어 recorder 목록을 읽지 못한 것은 <code>empty</code>가 아닙니다. 상태는 임의로 판단하지 않습니다.</p>
+<h2 id="2-health">2. 전체 health<a class="headerlink" href="#2-health" title="Permanent link">&para;</a></h2>
+<p>Overall health는 Helper runtime을 현재 사용할 수 있는지 요약합니다.</p>
+<table>
+<thead>
+<tr>
+<th>표시</th>
+<th>의미</th>
+<th>다음 확인</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Healthy</td>
+<td>runtime 실행 파일, VM, guest HTTP, host proxy가 사용 가능</td>
+<td>Recorders/Beds에서 실제 관측 상태 확인</td>
+</tr>
+<tr>
+<td>Needs attention</td>
+<td>실행은 가능하지만 일부 상태나 관측에 주의가 필요</td>
+<td>Advanced, Observability 확인</td>
+</tr>
+<tr>
+<td>Critical</td>
+<td>runtime 실행 또는 사용에 직접 장애가 있음</td>
+<td>Advanced failure reasons, Logs 확인</td>
+</tr>
+<tr>
+<td>Installing</td>
+<td>최초 설치 패키지가 runtime 파일, VM disk, service, 설정을 배치/등록하는 중</td>
+<td>installer 화면, install log 확인</td>
+</tr>
+<tr>
+<td>Initializing</td>
+<td>설치/provision 산출물이 준비됐고 runtime service, guest, HTTP endpoint가 사용 가능 상태로 올라오는 중</td>
+<td>4~5분 정도 완료 대기, 오래 지속되면 Status failure reasons와 Logs 확인</td>
+</tr>
+<tr>
+<td>Updating</td>
+<td>update bundle 적용, guest activation, rollback 진행 중</td>
+<td>Update progress, Logs 확인</td>
+</tr>
+<tr>
+<td>Recovering</td>
+<td>watchdog 또는 repair 흐름이 복구 중</td>
+<td>Advanced, Observability 확인</td>
+</tr>
+<tr>
+<td>Not installed</td>
+<td>Helper runtime이 설치 또는 실행 가능한 상태가 아님</td>
+<td>설치 또는 Reset for Reinstall command 확인</td>
+</tr>
+<tr>
+<td>Unknown</td>
+<td>상태를 읽었지만 표시 가능한 판단으로 확정하지 못함</td>
+<td>status document/read issue 확인</td>
+</tr>
+</tbody>
+</table>
+<p><code>Healthy</code>라도 recorder나 bed가 모두 정상이라는 뜻은 아닙니다. runtime이 사용 가능하다는 요약이고,
+실제 관측 상태는 Recorders/Beds 화면에서 확인합니다.</p>
+<p>처음 설치할 때는 VM 생성, service 등록, guest 준비, health 확인이 순서대로 진행됩니다. <code>Installing</code>은
+설치 작업 자체를 뜻하고, <code>Initializing</code>은 설치/provision 산출물이 준비된 뒤 runtime service와 guest가
+사용 가능 상태로 올라오는 중이라는 뜻입니다. 이 구간에 Advanced의 일부 service나 HTTP endpoint가
+아직 준비되지 않아도 해당 active operation 상태를 우선 표시합니다.</p>
+<h2 id="3-runtime-service">3. Runtime service<a class="headerlink" href="#3-runtime-service" title="Permanent link">&para;</a></h2>
+<p>Runtime service 상태는 Advanced 화면에서 봅니다. 이 값은 macOS launchd와 runtime read model에서
+온 상태를 표시합니다.</p>
+<h3 id="3-1-service">3-1. 표시되는 service<a class="headerlink" href="#3-1-service" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>service</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>VM service</td>
+<td>local VM runtime lifecycle</td>
+</tr>
+<tr>
+<td>Host proxy service</td>
+<td>macOS nginx host proxy</td>
+</tr>
+<tr>
+<td>Guest log sync service</td>
+<td>guest/runtime log 동기화</td>
+</tr>
+<tr>
+<td>Sleep prevention service</td>
+<td>runtime 운용 중 macOS sleep 방지</td>
+</tr>
+<tr>
+<td>Watchdog service</td>
+<td>runtime 상태 관측과 복구 판단</td>
+</tr>
+</tbody>
+</table>
+<h3 id="3-2-service">3-2. service 상태값<a class="headerlink" href="#3-2-service" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>표시</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Running</td>
+<td>launchd가 service를 loaded 상태로 보고함</td>
+</tr>
+<tr>
+<td>Stopped</td>
+<td>launchd가 service를 loaded 상태로 보고하지 않음</td>
+</tr>
+<tr>
+<td>Read failed</td>
+<td>service 상태 읽기에 실패함</td>
+</tr>
+<tr>
+<td>Permission denied</td>
+<td>권한 문제로 service 상태를 읽지 못함</td>
+</tr>
+<tr>
+<td>Installing</td>
+<td>설치 중이라 service 상태보다 operation 상태를 우선 표시</td>
+</tr>
+<tr>
+<td>Initializing</td>
+<td>초기 기동 중이라 service 상태보다 operation 상태를 우선 표시</td>
+</tr>
+<tr>
+<td>Updating</td>
+<td>update 중이라 service 상태보다 operation 상태를 우선 표시</td>
+</tr>
+<tr>
+<td>Recovering</td>
+<td>rollback, restore, repair 같은 recovery 중이라 service 상태보다 operation 상태를 우선 표시</td>
+</tr>
+<tr>
+<td>Unavailable</td>
+<td>표시할 명시 값이 없음</td>
+</tr>
+<tr>
+<td>Unknown</td>
+<td>계약에 없는 service 상태가 들어옴</td>
+</tr>
+</tbody>
+</table>
+<p>service가 <code>Stopped</code>라도 항상 장애는 아닙니다. install, initialization, update, recovery, stop/start 같은
+operation 중인지 함께 확인합니다. 단, <code>Read failed</code>와 <code>Permission denied</code>는 설치 중에도 별도 실패로 남겨
+표시합니다.</p>
+<p><code>Updating</code>과 <code>Recovering</code>은 서로 다른 operation 우선순위입니다. update apply가 실패해 rollback으로
+전환되면 Service liveness는 <code>Updating</code>을 계속 표시하지 않고 <code>Recovering</code>을 표시합니다. rollback workflow가
+runtime service restart와 health wait를 소유하므로 apply-bundle recovery layer가 별도 service restart를
+추가로 수행하지 않습니다.</p>
+<p>Service liveness 표시 순서는 operation service와 guest observation service를 먼저 보여주고, 브라우저로 열 수
+있는 URL endpoint는 아래 묶음으로 모읍니다. URL endpoint 묶음은 <code>VitalServer</code>, <code>Network access</code>,
+<code>Redis UI</code>, <code>Swagger UI</code> 순서로 표시합니다.</p>
+<p>Guest container service 상태는 guest runtime-state의 <code>containerServices</code> 계약에서 옵니다. 컨테이너가
+restart 중일 때 <code>docker compose ps</code>가 빈 결과를 내보내면 empty success로 취급하지 않고 <code>read-failed</code>
+container observation으로 올립니다. Advanced 화면에서 service가 <code>Not reported</code>와 다른 상태를 반복해서
+오가면, 먼저 <code>runtime-status.json</code>의 <code>containerObservation.composeServicesReadState</code>와
+<code>composeServicesReadError</code>를 확인합니다. 이 값이 <code>read-failed</code>, <code>missing</code>, <code>stale</code>이면 UI 표시 문제가
+아니라 guest service 관측 계약이 명시적으로 실패하거나 아직 보고되지 않은 상태입니다.</p>
+<h3 id="3-3-service-liveness-uptime">3-3. Service liveness uptime<a class="headerlink" href="#3-3-service-liveness-uptime" title="Permanent link">&para;</a></h3>
+<p>Service liveness의 시간 값은 Guest가 보고한 explicit service start time을 기준으로 합니다. Host/UI가
+process age, Mac boot time, log timestamp로 service uptime을 새로 만들지 않습니다.</p>
+<p>화면 표시만은 UX를 위해 현재 시각에 맞춰 계속 증가시킵니다. 즉 마지막으로 관측된 start time은 유지하고,
+화면은 그 start time부터 지금까지 지난 시간을 표시합니다. 새 관측 snapshot이 오면 start time이 바뀐
+경우에만 기준을 갱신합니다.</p>
+<table>
+<thead>
+<tr>
+<th>표시</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>00:05:14</code>처럼 증가</td>
+<td>마지막 관측된 service start time 기준으로 현재까지 흐른 시간</td>
+</tr>
+<tr>
+<td>갑자기 작아짐</td>
+<td>해당 service가 재시작됐거나 Guest가 새 start time을 보고함</td>
+</tr>
+<tr>
+<td>수백 일처럼 비정상적으로 큼</td>
+<td>Guest clock 또는 host-time sync contract를 먼저 확인</td>
+</tr>
+</tbody>
+</table>
+<h2 id="4-recorder-bed">4. Recorder와 Bed<a class="headerlink" href="#4-recorder-bed" title="Permanent link">&para;</a></h2>
+<p>Recorders/Beds 화면은 recorder observer와 audit proxy에서 만든 관측 결과를 표시합니다.</p>
+<h3 id="4-1-vrecorder">4-1. VRecorder 상태<a class="headerlink" href="#4-1-vrecorder" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>표시</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Online</td>
+<td>최신 관측 window에서 VRecorder activity가 확인됨</td>
+</tr>
+<tr>
+<td>Stale</td>
+<td>VRecorder는 알려져 있지만 최근 activity가 오래됨</td>
+</tr>
+<tr>
+<td>Offline</td>
+<td>VRecorder는 알려져 있으나 현재 online으로 보이지 않음</td>
+</tr>
+<tr>
+<td>Not observed</td>
+<td>과거 기록은 있으나 최신 관측 문서에 없음</td>
+</tr>
+<tr>
+<td>Unknown</td>
+<td>계약에 없는 recorder 상태가 들어옴</td>
+</tr>
+</tbody>
+</table>
+<p>Recorders 화면에서는 <code>VRecorder</code>, <code>Status</code>, <code>IP</code>, <code>Bed</code>, <code>Last seen</code>, <code>Anomaly</code>를 함께 봅니다.
+<code>IP</code> column에는 VRecorder 관측 IP와 Redis <code>ip_&lt;vrcode&gt;</code> sync 요약이 함께 표시될 수 있습니다.
+Recorder를 선택하면 Details의 <code>Network access</code>에서 connection IP, Redis value, Redis key, 마지막
+verify 시각, 마지막 failure를 확인합니다. 이 정보는 audit proxy가 명시적으로 제공한 recorder별
+상태이며, Service liveness에는 recorder별 상세 상태를 표시하지 않습니다.
+<code>History</code> 토글을 켜면 최신 관측에 없는 과거 recorder도 볼 수 있습니다.
+<code>Data updated</code>는 recorder/bed 상태 snapshot이 갱신된 시각이고, <code>Last seen</code>은 해당 VRecorder가
+마지막으로 보낸 activity 시각입니다. 둘은 다릅니다. Data updated가 오래되면 화면 전체가 stale일 수
+있고, Last seen만 오래되면 특정 VRecorder activity 문제일 수 있습니다.
+Anomaly는 개수만으로 원인을 확정하지 않고, 가장 최근 anomaly 종류와 메시지를 먼저 확인합니다.</p>
+<h3 id="4-2-bed">4-2. Bed 상태<a class="headerlink" href="#4-2-bed" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>표시</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Online</td>
+<td>최신 관측 window에서 bed activity가 확인됨</td>
+</tr>
+<tr>
+<td>Stale</td>
+<td>bed는 알려져 있지만 최근 activity가 오래됨</td>
+</tr>
+<tr>
+<td>Offline</td>
+<td>bed는 알려져 있으나 현재 online으로 보이지 않음</td>
+</tr>
+<tr>
+<td>Not observed</td>
+<td>과거 기록은 있으나 최신 관측 문서에 없음</td>
+</tr>
+<tr>
+<td>Unknown</td>
+<td>계약에 없는 bed 상태가 들어옴</td>
+</tr>
+</tbody>
+</table>
+<p>Beds 화면에서는 <code>Bed ID</code>, <code>Name</code>, <code>VRecorder</code>, <code>Status</code>, <code>Last seen</code>, <code>Anomaly</code>를 함께 봅니다.
+상세 영역에는 patient 연결 여부와 first seen/last seen 시간이 표시될 수 있습니다.
+Bed 상세의 <code>VRecorder status</code>, <code>VRecorder IP</code>, <code>VRecorder last seen</code>은 bed가 연결된 VRecorder
+read model에서 온 명시 상태입니다. Bed 화면은 VRecorder 상태를 임의로 추정하지 않습니다.</p>
+<h3 id="4-3-stale-offline">4-3. Stale과 Offline을 볼 때<a class="headerlink" href="#4-3-stale-offline" title="Permanent link">&para;</a></h3>
+<p><code>Stale</code>은 activity가 오래되었다는 뜻이고, <code>Offline</code>은 현재 online으로 보이지 않는다는 뜻입니다.
+둘 다 바로 장애 원인을 확정하지 않습니다.</p>
+<p>먼저 last seen, 연결 bed/VRecorder, Observability anomaly, Logs를 함께 확인합니다.</p>
+<h2 id="5">5. 읽기 실패<a class="headerlink" href="#5" title="Permanent link">&para;</a></h2>
+<p>read failure는 empty success가 아닙니다. 상태 소스를 읽지 못하면 별도 오류로 표시합니다.</p>
+<table>
+<thead>
+<tr>
+<th>표시 위치</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Status document read error</td>
+<td><code>runtime-status.json</code>을 읽거나 해석하지 못함</td>
+</tr>
+<tr>
+<td>Guest runtime state read error</td>
+<td>guest runtime state 계약을 읽거나 해석하지 못함</td>
+</tr>
+<tr>
+<td>Data directory stats failed</td>
+<td>설정된 Vital files directory 통계를 읽지 못함</td>
+</tr>
+<tr>
+<td>Recorder observation read issue</td>
+<td>recorder/bed 관측 snapshot을 읽지 못함</td>
+</tr>
+<tr>
+<td>Runtime event read issue</td>
+<td>runtime event history를 읽지 못함</td>
+</tr>
+</tbody>
+</table>
+<p>읽기 실패가 보이면 Logs 화면에서 export zip을 만들고, 필요한 경우 Observability event 기간과 함께
+지원 담당자에게 전달합니다.</p>
+<h2 id="6-settings-critical">6. Settings 적용 뒤 Critical<a class="headerlink" href="#6-settings-critical" title="Permanent link">&para;</a></h2>
+<p>Settings 화면에서 설정을 적용한 직후 <code>Critical</code> 또는 <code>Recovering</code>이 되면, 설정값 validation 실패와
+VM restart 실패를 구분합니다.</p>
+<p>Settings apply는 변경된 설정에 따라 VM runtime restart requirement를 먼저 판단합니다. CPU,
+memory, disk 증가, network mode, bridged interface, Vital files directory 변경은 VM runtime restart가
+필요합니다. URL, admin password, start on boot, auto recovery, sleep prevention, Redis backup
+retention 변경은 VM runtime restart requirement를 만들지 않습니다.</p>
+<p><code>Restart VM runtime when required</code>가 꺼져 있고 VM runtime restart가 필요한 설정을 저장하면 상태는
+<code>configure</code> operation의 degraded message로 "VM runtime restart required"를 표시할 수 있습니다.
+이 경우 설정 저장 실패가 아니라, 현재 실행 중인 VM에는 아직 반영되지 않았다는 뜻입니다.
+Settings의 <code>VM runtime restart</code> 영역에서 pending restart를 확인하고 <code>Requires VM restart</code> badge/action으로
+restart 확인을 열어 적용합니다.
+Status의 data directory는 saved settings가 아니라 현재 VM runtime에 적용된 Vital files directory를
+기준으로 표시해야 합니다. Vital files directory를 저장한 직후 VM restart 전인데 Status 경로가 새
+경로로 바뀌면 saved settings와 applied runtime settings가 섞인 것입니다.</p>
+<table>
+<thead>
+<tr>
+<th>확인 항목</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>runtime-events.jsonl</code>의 <code>configure</code> 직후 event</td>
+<td>설정 apply가 실제로 runtime restart를 요청했는지 확인</td>
+</tr>
+<tr>
+<td><code>vm-lifecycle.json</code></td>
+<td>VM이 <code>stopping</code>, <code>stopped</code>, <code>failed</code> 중 어디에 머물렀는지 확인</td>
+</tr>
+<tr>
+<td><code>launchd.out.log</code>의 guest shutdown 로그</td>
+<td>Docker/containerd stop, filesystem remount, poweroff 실패 여부 확인</td>
+</tr>
+<tr>
+<td><code>prepare-update-shutdown.request</code></td>
+<td>Settings apply인데 update shutdown request가 남아 반복 실행되는지 확인</td>
+</tr>
+<tr>
+<td>failure reasons</td>
+<td><code>host-proxy-http-*</code>, <code>audit-proxy-http-failed</code>, <code>guest-runtime-state-stale</code>이 연쇄인지 확인</td>
+</tr>
+</tbody>
+</table>
+<p>증상이 <code>configure</code> 직후 VM stop 요청, guest runtime state stale, host proxy HTTP 실패 순서로 이어지면
+Host proxy만 복구할 문제가 아닐 수 있습니다. VM shutdown 과정에서 guest service 또는 filesystem
+I/O가 아직 남아 있으면 디스크 오류가 드러나거나 악화될 수 있습니다.</p>
+<p>예방 원칙은 Settings restart, Update, Stop/Repair service가 같은 VM shutdown contract를 사용하게
+하는 것입니다. Host는 VM 내부 상태를 추측하지 않고, guest가 명시적으로 shutdown 준비와 poweroff
+요청 상태를 보고한 뒤 Host service stop/restart를 진행해야 합니다.</p>
+<p>Settings apply가 guest shutdown worker를 공유하더라도 update bundle 적용으로 보지 않습니다. Settings
+restart progress는 <code>configure</code> operation으로 해석하고, update bundle 적용은 <code>apply-bundle</code> operation과
+Update 탭의 progress로 따로 확인합니다.</p>
+<p><code>status=Recovering</code>, <code>operation=configure</code>인데 <code>prepare-update-shutdown-result.json</code>이
+<code>prepare-update-shutdown</code> running/prepared 상태로 남고 같은 request ID가 반복 로그에 나타나면, 이전
+update shutdown request가 VM reboot 뒤 다시 실행된 것입니다. Guest shutdown request는 single-shot
+contract이므로 worker가 request를 로드하고 running result를 쓴 뒤 즉시 request file을 소비해야 합니다.
+request file을 poweroff 직전까지 남겨두면 Settings restart, watchdog restart, service start가 모두
+update shutdown 경로를 다시 밟아 guest services를 내려버릴 수 있습니다.</p>
+<p><code>launchd.out.log</code>에 <code>Failed to execute shutdown binary</code>가 있고 <code>vm-lifecycle.json</code>이 <code>stopping</code>에
+머물러 있으면 Guest는 poweroff target까지 갔지만 Host VM process가 종료되지 않은 상태입니다. 이때
+Status는 <code>guest-runtime-state-stale</code>, <code>missing-vm-ip</code>, <code>host-proxy-http-*</code>를 연쇄로 표시할 수 있습니다.
+원인은 proxy 단독 장애가 아니라 VM stop 교착이므로, Settings restart 또는 watchdog recovery가 VM
+runtime services force-stop 후 start/health wait로 빠져나왔는지 확인합니다.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../scope/" class="btn btn-neutral float-left" title="Support Scope"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../observability-events/" class="btn btn-neutral float-right" title="Observability Events">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/tirosh-chain/tirosh-vitalserver" class="fa fa-code-fork" style="color: #fcfcfc"> tirosh-chain/tirosh-vitalserver</a>
+        </span>
+    
+    
+      <span><a href="../scope/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../observability-events/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

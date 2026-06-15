@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://tirosh-chain.github.io/vitalserver-helper/release/observability-events/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Observability Events - Vital Server Helper</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Observability Events";
+        var mkdocs_page_input_path = "release/observability-events.md";
+        var mkdocs_page_url = "/vitalserver-helper/release/observability-events/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Vital Server Helper
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Release</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../usage/">Usage</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../clean-uninstall/">Clean Uninstall</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../reset-installer/">Reset Installer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../scope/">Support Scope</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../runtime-status/">Runtime Status</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Observability Events</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#1">1. 언제 보나</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#2-pipeline">2. 관측 pipeline</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#3-runtime-event">3. Runtime event</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#3-1-event">3-1. 자주 보는 event</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#3-2-event">3-2. 관측 event</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#4-recorder-anomaly">4. Recorder anomaly</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#4-1-severity">4-1. Severity</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#5">5. 관계 변화</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#6">6. 지원 요청에 활용하기</a>
+    </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Dev</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../dev/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../dev/architecture/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../dev/runtime-contracts/">Runtime Contracts</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../dev/backup-restore-contracts/">Backup/Restore 계약</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../dev/repository-map/">Repository Map</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../dev/delivery-validation/">Delivery & Validation</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Vital Server Helper</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Release</li>
+      <li class="breadcrumb-item active">Observability Events</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/tirosh-chain/tirosh-vitalserver/edit/master/docs/release/observability-events.md">Edit on tirosh-chain/tirosh-vitalserver</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="observability-events">Observability Events<a class="headerlink" href="#observability-events" title="Permanent link">&para;</a></h1>
+<p>Observability Events는 “지금 상태가 왜 이렇게 보이는지”를 시간 순서로 확인하는 자료입니다.</p>
+<p>최신 상태 판단은 Status, Recorders, Beds, Advanced 화면에서 먼저 봅니다. Event는 최신 상태
+snapshot을 대체하지 않습니다. Event는 원인 추적과 지원 요청에 필요한 흐름을 보여줍니다.</p>
+<h2 id="1">1. 언제 보나<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
+<p>상태가 바뀌었거나, recorder/bed 관측이 이상하거나, update/repair 흐름을 추적해야 할 때 봅니다.</p>
+<table>
+<thead>
+<tr>
+<th>상황</th>
+<th>확인할 것</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>상태가 갑자기 Critical이 됨</td>
+<td>runtime event와 failure reason의 시간 순서</td>
+</tr>
+<tr>
+<td>recorder가 stale/offline으로 보임</td>
+<td>recorder anomaly와 마지막 관측 시각</td>
+</tr>
+<tr>
+<td>bed와 recorder 관계가 바뀜</td>
+<td>relationship history</td>
+</tr>
+<tr>
+<td>repair 또는 watchdog이 실행됨</td>
+<td>recovery event와 suppressed/deferred 여부</td>
+</tr>
+<tr>
+<td>상태 화면을 읽지 못함</td>
+<td>read issue와 observability store failure</td>
+</tr>
+</tbody>
+</table>
+<p>Event가 없다는 사실을 healthy로 해석하지 않습니다. Event 저장소를 읽지 못한 것과 실제 event가
+없는 것은 다른 의미입니다.</p>
+<h2 id="2-pipeline">2. 관측 pipeline<a class="headerlink" href="#2-pipeline" title="Permanent link">&para;</a></h2>
+<p>Pipeline 영역은 관측 데이터가 들어오고 있는지 보여줍니다.</p>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Recorder observer</td>
+<td>Redis/proxy 기반 recorder observation snapshot 생성 상태</td>
+</tr>
+<tr>
+<td>Guest log sync service</td>
+<td>guest/runtime log 동기화 service 상태</td>
+</tr>
+<tr>
+<td>Recorder observation</td>
+<td>최신 recorder observation이 기록된 시각</td>
+</tr>
+<tr>
+<td>Known recorders</td>
+<td>관측 read model이 알고 있는 VRecorder 수</td>
+</tr>
+<tr>
+<td>Known beds</td>
+<td>관측 read model이 알고 있는 bed 수</td>
+</tr>
+<tr>
+<td>Recorder anomalies</td>
+<td>현재 관측된 VRecorder/bed anomaly 수</td>
+</tr>
+<tr>
+<td>Runtime events</td>
+<td>선택한 기간의 runtime event 수</td>
+</tr>
+</tbody>
+</table>
+<p>pipeline 항목이 unavailable이면 상태를 임의로 판단하지 않습니다. read issue와 Logs를 함께 확인합니다.</p>
+<h2 id="3-runtime-event">3. Runtime event<a class="headerlink" href="#3-runtime-event" title="Permanent link">&para;</a></h2>
+<p>Runtime event는 host runtime이 남긴 timeline입니다. update, recovery, health observation,
+runtime command 흐름을 시간 순서로 볼 수 있습니다.</p>
+<h3 id="3-1-event">3-1. 자주 보는 event<a class="headerlink" href="#3-1-event" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>event type</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>status-changed</code></td>
+<td>runtime status가 변경됨</td>
+</tr>
+<tr>
+<td><code>progress-updated</code></td>
+<td>workflow step 또는 progress가 갱신됨</td>
+</tr>
+<tr>
+<td><code>health-observed</code></td>
+<td>health snapshot이 관측됨</td>
+</tr>
+<tr>
+<td><code>runtime-command-started</code></td>
+<td>CLI/API command 실행 시작</td>
+</tr>
+<tr>
+<td><code>runtime-command-completed</code></td>
+<td>CLI/API command 실행 완료</td>
+</tr>
+<tr>
+<td><code>runtime-command-failed</code></td>
+<td>CLI/API command 실행 실패</td>
+</tr>
+<tr>
+<td><code>recovery-planned</code></td>
+<td>watchdog 또는 repair 복구가 계획됨</td>
+</tr>
+<tr>
+<td><code>recovery-triggered</code></td>
+<td>복구 command가 실행됨</td>
+</tr>
+<tr>
+<td><code>recovery-completed</code></td>
+<td>복구 흐름이 완료됨</td>
+</tr>
+<tr>
+<td><code>recovery-suppressed</code></td>
+<td>조건 때문에 복구가 억제됨</td>
+</tr>
+<tr>
+<td><code>recovery-deferred</code></td>
+<td>다른 작업 때문에 복구가 지연됨</td>
+</tr>
+<tr>
+<td><code>watchdog-skipped</code></td>
+<td>watchdog이 실행 조건 미충족으로 건너뜀</td>
+</tr>
+<tr>
+<td><code>observability-store-failed</code></td>
+<td>event 또는 observability store 기록/읽기 실패</td>
+</tr>
+</tbody>
+</table>
+<p>Update 실패 후 rollback이 실행되면 update failure event와 rollback event가 모두 남아야 합니다. Rollback
+health wait가 성공했다고 해서 앞선 update failure event를 지우거나 성공으로 해석하지 않습니다. 같은
+시간대에 <code>prepare-update-shutdown</code>, <code>apply-bundle</code>, <code>rollback</code>, <code>health-observed</code> event를 함께 봅니다.</p>
+<h3 id="3-2-event">3-2. 관측 event<a class="headerlink" href="#3-2-event" title="Permanent link">&para;</a></h3>
+<p>아래 event는 runtime 주변 상태가 관측되었음을 나타냅니다.</p>
+<table>
+<thead>
+<tr>
+<th>event type</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>runtime-status-observed</code></td>
+<td>runtime status document가 관측됨</td>
+</tr>
+<tr>
+<td><code>guest-state-observed</code></td>
+<td>guest runtime state가 관측됨</td>
+</tr>
+<tr>
+<td><code>container-observed</code></td>
+<td>guest container/service observation이 기록됨</td>
+</tr>
+<tr>
+<td><code>audit-proxy-observed</code></td>
+<td>audit proxy observation이 기록됨</td>
+</tr>
+<tr>
+<td><code>vitaldb-observed</code></td>
+<td>recorder observer snapshot이 기록됨</td>
+</tr>
+<tr>
+<td><code>vitaldb-observer-unhealthy</code></td>
+<td>recorder observer가 unhealthy 상태를 보고함</td>
+</tr>
+<tr>
+<td><code>vitaldb-anomaly-detected</code></td>
+<td>recorder/bed anomaly가 감지됨</td>
+</tr>
+<tr>
+<td><code>domain-error-observed</code></td>
+<td>runtime policy 오류가 관측됨</td>
+</tr>
+<tr>
+<td><code>vm-error-observed</code></td>
+<td>VM 오류가 관측됨</td>
+</tr>
+<tr>
+<td><code>service-restart-dispatched</code></td>
+<td>service restart command가 dispatch됨</td>
+</tr>
+</tbody>
+</table>
+<p>Event row에는 event type, runtime status, operation, message, detail이 표시됩니다. Detail에는 VM state,
+failure reasons, active recorder connections, known recorders, anomaly count가 포함될 수 있습니다.</p>
+<h2 id="4-recorder-anomaly">4. Recorder anomaly<a class="headerlink" href="#4-recorder-anomaly" title="Permanent link">&para;</a></h2>
+<p>Recorder anomaly는 recorder/bed 관측에서 감지한 이상 징후입니다.</p>
+<table>
+<thead>
+<tr>
+<th>anomaly kind</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>offline</code></td>
+<td>기대되거나 알려진 recorder/bed가 현재 online으로 보이지 않음</td>
+</tr>
+<tr>
+<td><code>duplicate-ip</code></td>
+<td>둘 이상의 recorder가 같은 IP로 관측됨</td>
+</tr>
+<tr>
+<td><code>backend-unavailable</code></td>
+<td>recorder backend 관측 자체가 불가능함</td>
+</tr>
+<tr>
+<td><code>stale-recorder</code></td>
+<td>recorder activity가 오래됨</td>
+</tr>
+<tr>
+<td><code>observer-unhealthy</code></td>
+<td>observer가 unhealthy 상태를 보고함</td>
+</tr>
+</tbody>
+</table>
+<h3 id="4-1-severity">4-1. Severity<a class="headerlink" href="#4-1-severity" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>severity</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>info</code></td>
+<td>참고용 event</td>
+</tr>
+<tr>
+<td><code>warning</code></td>
+<td>운영 확인이 필요한 상태</td>
+</tr>
+<tr>
+<td><code>critical</code></td>
+<td>runtime 사용성 또는 관측 신뢰성에 직접 영향 가능</td>
+</tr>
+</tbody>
+</table>
+<p>anomaly가 있다고 해서 곧바로 원인이 확정되는 것은 아닙니다. Recorders/Beds 화면의 status,
+last seen, relationship history를 함께 봅니다.</p>
+<h2 id="5">5. 관계 변화<a class="headerlink" href="#5" title="Permanent link">&para;</a></h2>
+<p>Relationship history는 VRecorder와 bed의 관계 변화를 보여줍니다.</p>
+<table>
+<thead>
+<tr>
+<th>event type</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>handoff</code></td>
+<td>bed가 다른 VRecorder로 넘어감</td>
+</tr>
+<tr>
+<td><code>duplicateAssignment</code></td>
+<td>동일 bed 또는 recorder 관계가 중복 관측됨</td>
+</tr>
+<tr>
+<td><code>unlinkedBed</code></td>
+<td>bed는 관측되지만 recorder 관계가 명확하지 않음</td>
+</tr>
+<tr>
+<td><code>unlinkedRecorder</code></td>
+<td>recorder는 관측되지만 bed 관계가 명확하지 않음</td>
+</tr>
+<tr>
+<td><code>staleLink</code></td>
+<td>recorder-bed 관계가 오래된 관측에 기반함</td>
+</tr>
+</tbody>
+</table>
+<p>Relationship event는 최신 상태 판단이 아니라 관계 변화의 이력입니다. 최신 상태는 Recorders/Beds
+목록의 status와 last seen을 기준으로 확인합니다.</p>
+<h2 id="6">6. 지원 요청에 활용하기<a class="headerlink" href="#6" title="Permanent link">&para;</a></h2>
+<p>지원 요청 시에는 event 내용만 전달하지 말고, 같은 화면을 다시 볼 수 있는 조건을 함께 전달합니다.</p>
+<table>
+<thead>
+<tr>
+<th>자료</th>
+<th>이유</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>문제가 발생한 시간대</td>
+<td>event 기간 filter를 맞추기 위해</td>
+</tr>
+<tr>
+<td>선택한 event type/filter</td>
+<td>같은 event 목록을 재현하기 위해</td>
+</tr>
+<tr>
+<td>runtime logs 또는 exported logs</td>
+<td>event와 실제 service log를 비교하기 위해</td>
+</tr>
+<tr>
+<td>installer 또는 uninstaller log</td>
+<td>설치/정리 실패와 runtime 문제를 구분하기 위해</td>
+</tr>
+</tbody>
+</table>
+<p>read issue, permission failure, decode failure는 별도 실패로 다룹니다.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../runtime-status/" class="btn btn-neutral float-left" title="Runtime Status"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../dev/" class="btn btn-neutral float-right" title="Overview">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/tirosh-chain/tirosh-vitalserver" class="fa fa-code-fork" style="color: #fcfcfc"> tirosh-chain/tirosh-vitalserver</a>
+        </span>
+    
+    
+      <span><a href="../runtime-status/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../../dev/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

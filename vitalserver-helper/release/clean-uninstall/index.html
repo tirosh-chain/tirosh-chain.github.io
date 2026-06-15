@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://tirosh-chain.github.io/vitalserver-helper/release/clean-uninstall/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Clean Uninstall - Vital Server Helper</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Clean Uninstall";
+        var mkdocs_page_input_path = "release/clean-uninstall.md";
+        var mkdocs_page_url = "/vitalserver-helper/release/clean-uninstall/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Vital Server Helper
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Release</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../usage/">Usage</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Clean Uninstall</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#1">1. 기능 차이</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#2-clean-uninstall">2. Clean uninstall의 보존/삭제 정책</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#3-progress">3. Progress 결과 판정</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#4-reset-command">4. Reset command를 쓰는 상황</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#5">5. 과거 삭제 실패 원인</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#6">6. 운영 원칙</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../reset-installer/">Reset Installer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../scope/">Support Scope</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../runtime-status/">Runtime Status</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../observability-events/">Observability Events</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Dev</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../dev/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../dev/architecture/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../dev/runtime-contracts/">Runtime Contracts</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../dev/backup-restore-contracts/">Backup/Restore 계약</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../dev/repository-map/">Repository Map</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../dev/delivery-validation/">Delivery & Validation</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Vital Server Helper</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Release</li>
+      <li class="breadcrumb-item active">Clean Uninstall</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/tirosh-chain/tirosh-vitalserver/edit/master/docs/release/clean-uninstall.md">Edit on tirosh-chain/tirosh-vitalserver</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="clean-uninstall-and-reset-for-reinstall">Clean Uninstall and Reset for Reinstall<a class="headerlink" href="#clean-uninstall-and-reset-for-reinstall" title="Permanent link">&para;</a></h1>
+<p>이 문서는 내부 clean uninstall 기능과 Reset for Reinstall command의 차이를 설명합니다.</p>
+<p>두 기능은 같은 제거 backend를 공유하지만, 운영 목적이 다릅니다. Clean uninstall은 Helper가
+실행 중인 상태에서 요청하는 정상 제거 흐름이고, reset command는 새 설치가 막힌 Mac을 다시
+설치 가능한 상태로 되돌리는 강제 복구 도구입니다.</p>
+<h2 id="1">1. 기능 차이<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>구분</th>
+<th>Clean uninstall</th>
+<th>Reset for Reinstall command</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>목적</td>
+<td>설치된 Helper/runtime을 정상 제거</td>
+<td>fresh install preflight를 막는 잔존 상태 제거</td>
+</tr>
+<tr>
+<td>실행 위치</td>
+<td>Helper app, Runtime Control API, runtime CLI 내부 경로</td>
+<td>DMG의 <code>Troubleshooting Tools</code> command</td>
+</tr>
+<tr>
+<td>대표 command</td>
+<td><code>vitalserver-vm runtime uninstall --clean</code></td>
+<td><code>vitalserver-vm runtime uninstall --force-clean-uninstaller</code></td>
+</tr>
+<tr>
+<td>VM stop</td>
+<td>정상 stop과 service unload를 우선</td>
+<td>VM process force stop을 포함한 recovery 경로 사용</td>
+</tr>
+<tr>
+<td>Helper app 처리</td>
+<td>호출한 Helper app이 종료 예약을 함께 해야 함</td>
+<td>command가 Helper app 종료를 시도하고 필요하면 강제 종료</td>
+</tr>
+<tr>
+<td>삭제 범위</td>
+<td>Helper app, runtime home, runtime tools, LaunchDaemon plist, package receipt, clean 대상 user data</td>
+<td>clean uninstall 범위에 더해 fresh install blocker 검증에 필요한 Host state까지 강하게 확인</td>
+</tr>
+<tr>
+<td>완료 기준</td>
+<td>uninstall workflow가 파일 제거, disabled override 정리, receipt 정리를 완료해야 함</td>
+<td>runtime artifact, launchd service, package receipt 중 fresh install blocker가 남지 않아야 함</td>
+</tr>
+<tr>
+<td>사용 시점</td>
+<td>지원 담당자가 내부 제거 흐름을 검증하거나 운영 UI에서 제거 요청을 수행할 때</td>
+<td>설치가 <code>fresh install preflight blocked</code>로 막혔을 때</td>
+</tr>
+</tbody>
+</table>
+<p>일반 현장 사용자는 재설치가 목적이면 Clean uninstall을 반복하지 않습니다. 설치가 막힌 상태에서는
+<a href="../reset-installer/">Reset for Reinstall command</a>를 사용합니다.</p>
+<h2 id="2-clean-uninstall">2. Clean uninstall의 보존/삭제 정책<a class="headerlink" href="#2-clean-uninstall" title="Permanent link">&para;</a></h2>
+<p>표준 uninstall은 clean이 아닐 때 Redis backup을 먼저 만들고 logs, backups, Redis backups,
+기본 Vital files directory를 임시 위치에 보존한 뒤 product root를 제거하고 복원합니다.</p>
+<p>Clean uninstall은 user data 보존을 하지 않습니다. 설정된 external Vital files directory가 있으면
+clean 대상에 포함됩니다. 다만 configured path를 읽지 못하면 external directory cleanup을 추정하지
+않고 명시적으로 skip log를 남깁니다.</p>
+<h2 id="3-progress">3. Progress 결과 판정<a class="headerlink" href="#3-progress" title="Permanent link">&para;</a></h2>
+<p>Helper app에서 시작한 Clean uninstall은 background worker와 progress viewer를 사용합니다. viewer는
+log marker만으로 성공/실패를 추정하지 않고 현재 runID의 result document를 우선합니다.</p>
+<p>result document는 uninstall workflow 결과와 fresh install readiness를 분리해서 기록합니다.</p>
+<table>
+<thead>
+<tr>
+<th>필드</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>runID</code></td>
+<td>현재 progress viewer와 worker가 공유하는 실행 ID</td>
+</tr>
+<tr>
+<td><code>state</code></td>
+<td><code>running</code>, <code>completed</code>, <code>failed</code> 같은 progress 결과</td>
+</tr>
+<tr>
+<td><code>exitCode</code></td>
+<td>worker command의 exit code</td>
+</tr>
+<tr>
+<td><code>uninstallCompleted</code></td>
+<td>uninstall workflow 자체가 성공했는지</td>
+</tr>
+<tr>
+<td><code>freshInstallReadiness.state</code></td>
+<td>fresh install blocker 검증 여부. Clean uninstall progress에서는 <code>not-checked</code>가 정상입니다.</td>
+</tr>
+<tr>
+<td><code>freshInstallReadiness.blockers</code></td>
+<td>readiness가 검증된 경우의 blocker 목록. <code>not-checked</code>이면 비어 있어도 fresh install 가능을 뜻하지 않습니다.</td>
+</tr>
+</tbody>
+</table>
+<p>따라서 <code>uninstallCompleted=true</code>는 Clean uninstall workflow 성공만 뜻합니다. 새 설치가 계속 막히면
+Reset command 또는 fresh install preflight 결과의 blocker를 별도로 봐야 합니다.</p>
+<p>viewer가 <code>Uninstall result is unavailable</code>을 표시해도, 먼저
+<code>/private/tmp/tirosh-vitalserver-uninstall-progress.command.result.json</code>을 확인합니다. 해당 파일의
+현재 <code>runID</code>가 맞고 <code>state=completed</code>, <code>uninstallCompleted=true</code>이면 uninstall workflow는 성공한
+것입니다. 이 경우는 worker 종료와 result/marker 관측 사이의 progress viewer race로 분류하고,
+cleanup 실패로 보지 않습니다.</p>
+<h2 id="4-reset-command">4. Reset command를 쓰는 상황<a class="headerlink" href="#4-reset-command" title="Permanent link">&para;</a></h2>
+<p>Reset command는 정상 제거 UX가 아니라 recovery tool입니다. 아래 blocker가 보이면 reset
+command를 사용합니다.</p>
+<pre><code class="language-text">VitalServer Helper pkg install supports fresh installs only.
+An existing VitalServer Helper install, launchd service, package receipt,
+or Host proxy port conflict blocks this install.
+</code></pre>
+<p>Reset command가 성공하려면 다음 상태가 모두 정리되어야 합니다.</p>
+<table>
+<thead>
+<tr>
+<th>상태</th>
+<th>왜 확인하나</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>runtime artifact</td>
+<td>product root, app bundle, runtime tool이 남으면 fresh install이 막힘</td>
+</tr>
+<tr>
+<td>launchd service</td>
+<td>plist가 없어도 loaded/running job이 남을 수 있음</td>
+</tr>
+<tr>
+<td>launchd disabled override</td>
+<td>plist 밖에 남는 Host state라 다음 bootstrap을 막을 수 있음</td>
+</tr>
+<tr>
+<td>package receipt</td>
+<td>receipt가 남으면 fresh install 전용 package가 기존 설치로 판단함</td>
+</tr>
+<tr>
+<td>Host proxy listener</td>
+<td>VitalServer가 띄운 nginx가 orphan process로 port를 점유할 수 있음</td>
+</tr>
+</tbody>
+</table>
+<h2 id="5">5. 과거 삭제 실패 원인<a class="headerlink" href="#5" title="Permanent link">&para;</a></h2>
+<p>삭제가 안 된 것처럼 보였던 문제는 대부분 단순 파일 삭제 실패가 아니라 Host-owned state가
+남은 문제였습니다.</p>
+<table>
+<thead>
+<tr>
+<th>원인</th>
+<th>증상</th>
+<th>자세한 문서</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>launchd disabled override 잔존</td>
+<td>새 설치 중 <code>Service is disabled</code></td>
+<td><a href="https://github.com/tirosh-chain/tirosh-vitalserver/blob/main/docs/troubleshooting/046_pkg-postinstall-launchd-disabled.md">TS-046</a></td>
+</tr>
+<tr>
+<td>PWA background command handoff 실패</td>
+<td>UI는 시작됐다고 보이지만 product root/receipt가 남음</td>
+<td><a href="https://github.com/tirosh-chain/tirosh-vitalserver/blob/main/docs/troubleshooting/050_pwa-clean-uninstall-background-command.md">TS-050</a></td>
+</tr>
+<tr>
+<td>VM/launchd state 잔존</td>
+<td><code>launchd-service-loaded</code> blocker</td>
+<td><a href="https://github.com/tirosh-chain/tirosh-vitalserver/blob/main/docs/troubleshooting/058_clean-uninstall-hung-vm-progress-marker.md">TS-058</a></td>
+</tr>
+<tr>
+<td>status writer가 product root를 재생성</td>
+<td><code>install-artifact-present:path=/Library/Application Support/VitalServerHelper</code></td>
+<td><a href="../reset-installer/">Reset for Reinstall command</a></td>
+</tr>
+<tr>
+<td>orphan host proxy nginx</td>
+<td>port 80 occupied by nginx</td>
+<td><a href="https://github.com/tirosh-chain/tirosh-vitalserver/blob/main/docs/troubleshooting/051_install-blocked-by-orphan-host-proxy-nginx.md">TS-051</a></td>
+</tr>
+</tbody>
+</table>
+<p>이 원인들은 파일 존재 여부만으로 판단하면 안 됩니다. launchd, process, package receipt, status
+writer가 각각 명시적으로 관측되어야 합니다.</p>
+<h2 id="6">6. 운영 원칙<a class="headerlink" href="#6" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Clean uninstall 성공을 fresh install 가능 상태로 추정하지 않습니다.</li>
+<li>Reset command 성공은 runtime artifact, launchd service, package receipt blocker가 없는지로 확인합니다.</li>
+<li>Helper app이나 PWA가 background uninstaller 시작을 보고해도 uninstall 완료로 표시하지 않습니다.</li>
+<li>Progress viewer는 현재 runID의 result document를 우선하고, log tail은 진단 정보로만 취급합니다.</li>
+<li>제거 후 runtime status writer가 product root를 다시 만들면 안 됩니다.</li>
+<li>외부 nginx, Docker, Homebrew, 사용자 문서처럼 Helper가 소유하지 않은 상태는 삭제하지 않습니다.</li>
+</ul>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../usage/" class="btn btn-neutral float-left" title="Usage"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../reset-installer/" class="btn btn-neutral float-right" title="Reset Installer">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/tirosh-chain/tirosh-vitalserver" class="fa fa-code-fork" style="color: #fcfcfc"> tirosh-chain/tirosh-vitalserver</a>
+        </span>
+    
+    
+      <span><a href="../usage/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../reset-installer/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

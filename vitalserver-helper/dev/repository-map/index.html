@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://tirosh-chain.github.io/vitalserver-helper/dev/repository-map/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Repository Map - Vital Server Helper</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Repository Map";
+        var mkdocs_page_input_path = "dev/repository-map.md";
+        var mkdocs_page_url = "/vitalserver-helper/dev/repository-map/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Vital Server Helper
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Release</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../release/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../release/usage/">Usage</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../release/clean-uninstall/">Clean Uninstall</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../release/reset-installer/">Reset Installer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../release/scope/">Support Scope</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../release/runtime-status/">Runtime Status</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../release/observability-events/">Observability Events</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Dev</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../architecture/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../runtime-contracts/">Runtime Contracts</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../backup-restore-contracts/">Backup/Restore 계약</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Repository Map</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#1">1. 먼저 볼 곳</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#1-1">1-1. 작업별 입구</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#1-2">1-2. 헷갈리기 쉬운 기준</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#2">2. 큰 폴더</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#2-1-apps">2-1. apps</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#2-2-packages">2-2. packages</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#3-macos-runtime">3. macOS runtime 구조</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#3-1-source-layout">3-1. Source layout</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#3-2">3-2. 각 폴더의 역할</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#3-3-testkit-dev-console">3-3. TestKit과 Dev Console</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#4">4. 자주 들어가는 외부 연결 코드</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#4-1-runtime-control-api">4-1. Runtime Control API</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#4-2-mac-control-panel">4-2. Mac Control Panel</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#4-3-mac-runtime-control-client">4-3. Mac Runtime Control Client</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#5">5. 문서 노출 기준</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#5-1-release">5-1. Release 문서에 쓰는 것</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#5-2-dev">5-2. Dev 문서에 쓰는 것</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#5-3-docs-site-docs">5-3. docs와 site-docs 구분</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#6">6. 변경할 때 지킬 것</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#6-1">6-1. 공통 기준</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#6-2">6-2. 변경 유형별 기준</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#6-3">6-3. 피해야 할 것</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../delivery-validation/">Delivery & Validation</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Vital Server Helper</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Dev</li>
+      <li class="breadcrumb-item active">Repository Map</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/tirosh-chain/tirosh-vitalserver/edit/master/docs/dev/repository-map.md">Edit on tirosh-chain/tirosh-vitalserver</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="repository-map">Repository Map<a class="headerlink" href="#repository-map" title="Permanent link">&para;</a></h1>
+<p>이 repository는 Vital Server Helper를 구성하는 여러 app, package, 문서를 함께 담는 monorepo입니다.</p>
+<p>이 문서는 “어떤 일을 하려면 어디를 보면 되는가”를 빠르게 찾기 위한 지도입니다. 모든 폴더를
+외우는 것이 목적이 아니라, 변경하려는 일이 어느 책임에 속하는지 먼저 구분하는 것이 목적입니다.</p>
+<h2 id="1">1. 먼저 볼 곳<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
+<p>처음 코드를 볼 때는 아래 순서가 좋습니다.</p>
+<ol>
+<li>전체 제품 구조는 <a href="../architecture/">Architecture</a>를 먼저 봅니다.</li>
+<li>상태 단어와 API 의미는 <a href="../runtime-contracts/">Runtime Contracts</a>를 봅니다.</li>
+<li>실제 코드 위치는 이 문서의 “작업별 입구”에서 찾습니다.</li>
+<li>검증 방법은 <a href="../delivery-validation/">Delivery &amp; Validation</a>을 봅니다.</li>
+</ol>
+<h3 id="1-1">1-1. 작업별 입구<a class="headerlink" href="#1-1" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>하고 싶은 일</th>
+<th>먼저 볼 곳</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Helper app 화면 수정</td>
+<td><code>apps/vitalserver-macos-runtime/Sources/Adapters/Inbound/MacControlPanel/Presentation</code></td>
+</tr>
+<tr>
+<td>PWA 화면 수정</td>
+<td><code>apps/vitalserver-runtime-pwa/src/pages</code></td>
+</tr>
+<tr>
+<td>Runtime Control API 수정</td>
+<td><code>apps/vitalserver-macos-runtime/Sources/Adapters/Inbound/RuntimeControlAPI</code></td>
+</tr>
+<tr>
+<td>runtime status 의미 수정</td>
+<td><code>apps/vitalserver-macos-runtime/Sources/Contracts</code>와 <code>apps/vitalserver-macos-runtime/Sources/Domain</code></td>
+</tr>
+<tr>
+<td>recorder/bed 관측 수정</td>
+<td><code>apps/vitaldb-observer</code>와 macOS runtime의 observability reader</td>
+</tr>
+<tr>
+<td>update/recovery 흐름 수정</td>
+<td><code>apps/vitalserver-macos-runtime/Sources/Workflow</code>와 <code>Sources/Hosts/CLI</code></td>
+</tr>
+<tr>
+<td>packaging 또는 release bundle 수정</td>
+<td><code>packages/vitalserver-devtools</code>, <code>apps/vitalserver-macos-runtime/Support</code>, <code>Makefile</code></td>
+</tr>
+<tr>
+<td>testkit 수정</td>
+<td><code>packages/vitalserver-testkit</code>와 runtime TestKit API</td>
+</tr>
+<tr>
+<td>문서 수정</td>
+<td><code>site-docs/</code>와 <code>docs/</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="1-2">1-2. 헷갈리기 쉬운 기준<a class="headerlink" href="#1-2" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>질문</th>
+<th>기준</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>UI에서 상태를 만들어도 되는가?</td>
+<td>안 됩니다. UI는 받은 상태를 표시합니다.</td>
+</tr>
+<tr>
+<td>Host가 Guest 내부 상태를 추측해도 되는가?</td>
+<td>안 됩니다. Guest가 만든 문서나 API 응답을 읽습니다.</td>
+</tr>
+<tr>
+<td>실패를 빈 결과로 바꿔도 되는가?</td>
+<td>안 됩니다. 실패와 empty는 다릅니다.</td>
+</tr>
+<tr>
+<td>새 기능은 어디에 넣는가?</td>
+<td>상태를 말하는 곳, 판단하는 곳, 실행하는 곳을 먼저 나눕니다.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="2">2. 큰 폴더<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
+<p>Repository root에서는 먼저 두 가지만 구분하면 됩니다.</p>
+<p><code>apps/</code>는 실제로 실행되는 것들이 모인 곳입니다. Helper app, PWA, observer, audit proxy처럼
+제품을 이루는 app과 service가 여기에 있습니다.</p>
+<p><code>packages/</code>는 그 app들을 만들고 검증하고 운영하는 데 쓰는 도구가 모인 곳입니다. testkit,
+devtools, guest tools처럼 여러 위치에서 재사용되는 package가 여기에 있습니다.</p>
+<p>그 밖의 폴더는 설정, 문서, script, infrastructure를 보조합니다.</p>
+<table>
+<thead>
+<tr>
+<th>경로</th>
+<th>무엇이 들어 있나</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>apps/</code></td>
+<td>제품으로 실행되는 app과 service</td>
+</tr>
+<tr>
+<td><code>packages/</code></td>
+<td>build, 검증, guest 운영에 쓰는 재사용 도구</td>
+</tr>
+<tr>
+<td><code>infra/</code></td>
+<td>proxy, Swagger UI, 배포 보조 파일</td>
+</tr>
+<tr>
+<td><code>config/</code></td>
+<td>build, packaging, testkit 설정</td>
+</tr>
+<tr>
+<td><code>scripts/</code></td>
+<td>repository 전체에서 쓰는 보조 script</td>
+</tr>
+<tr>
+<td><code>vendor/</code></td>
+<td>Vital Server source reference</td>
+</tr>
+<tr>
+<td><code>docs/</code></td>
+<td>runtime/API/ADR/troubleshooting 같은 상세 문서</td>
+</tr>
+<tr>
+<td><code>site-docs/</code></td>
+<td>공개 site로 빌드되는 문서</td>
+</tr>
+</tbody>
+</table>
+<h3 id="2-1-apps">2-1. apps<a class="headerlink" href="#2-1-apps" title="Permanent link">&para;</a></h3>
+<p><code>apps/</code>는 제품을 이루는 실행 단위입니다. 화면, host runtime, observer, proxy처럼 각각
+독립적인 책임을 가진 app이나 service가 들어 있습니다.</p>
+<table>
+<thead>
+<tr>
+<th>경로</th>
+<th>역할</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>apps/vitalserver</code></td>
+<td>Vital Server를 Helper runtime 안에서 실행하기 위한 wrapper</td>
+</tr>
+<tr>
+<td><code>apps/vitalserver-macos-runtime</code></td>
+<td>macOS Helper app, host runtime, VM 관리, packaging</td>
+</tr>
+<tr>
+<td><code>apps/vitalserver-runtime-pwa</code></td>
+<td>browser에서 여는 Runtime Control UI</td>
+</tr>
+<tr>
+<td><code>apps/vitaldb-observer</code></td>
+<td>Redis/proxy를 읽어 recorder/bed 상태를 정리</td>
+</tr>
+<tr>
+<td><code>apps/vitalserver-audit-proxy</code></td>
+<td>VRecorder command와 audit event를 관측</td>
+</tr>
+</tbody>
+</table>
+<h3 id="2-2-packages">2-2. packages<a class="headerlink" href="#2-2-packages" title="Permanent link">&para;</a></h3>
+<p><code>packages/</code>는 제품 자체라기보다 제품을 만들고 검증하고 운영하는 도구입니다. 실제 현장
+기능과 연결되지만, app처럼 독립 화면이나 service entrypoint를 갖는 것과는 구분합니다.</p>
+<table>
+<thead>
+<tr>
+<th>경로</th>
+<th>역할</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>packages/vitalserver-testkit</code></td>
+<td>가상 recorder와 smoke/load 검증 도구</td>
+</tr>
+<tr>
+<td><code>packages/vitalserver-devtools</code></td>
+<td>packaging, VM image, update bundle을 만드는 도구</td>
+</tr>
+<tr>
+<td><code>packages/vitalserver-guest-tools</code></td>
+<td>Linux guest 안에서 상태, update, logs, repair를 다루는 도구</td>
+</tr>
+</tbody>
+</table>
+<h2 id="3-macos-runtime">3. macOS runtime 구조<a class="headerlink" href="#3-macos-runtime" title="Permanent link">&para;</a></h2>
+<p><code>apps/vitalserver-macos-runtime/Sources</code>는 Helper app과 host runtime의 핵심 코드입니다. 폴더 이름은
+책임을 드러내야 합니다.</p>
+<h3 id="3-1-source-layout">3-1. Source layout<a class="headerlink" href="#3-1-source-layout" title="Permanent link">&para;</a></h3>
+<pre><code class="language-text">Sources/
+  Contracts/
+  Domain/
+  Application/
+  Workflow/
+  Adapters/
+  Hosts/
+  Bootstrap/
+  Errors/
+</code></pre>
+<h3 id="3-2">3-2. 각 폴더의 역할<a class="headerlink" href="#3-2" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>폴더</th>
+<th>쉬운 설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Contracts</code></td>
+<td>주고받는 문서와 API 모델</td>
+</tr>
+<tr>
+<td><code>Domain</code></td>
+<td>상태 판단 규칙과 전이 규칙</td>
+</tr>
+<tr>
+<td><code>Application</code></td>
+<td>명령을 실행하기 전 필요한 결정</td>
+</tr>
+<tr>
+<td><code>Workflow</code></td>
+<td>install, update, repair, uninstall 같은 긴 작업 순서</td>
+</tr>
+<tr>
+<td><code>Adapters</code></td>
+<td>외부 연결 코드. API, UI, 파일, process, network 연결</td>
+</tr>
+<tr>
+<td><code>Hosts</code></td>
+<td>CLI와 Mac app 실행 경계</td>
+</tr>
+<tr>
+<td><code>Bootstrap</code></td>
+<td>앱 시작 시 필요한 설정, 경로, 구현 연결</td>
+</tr>
+<tr>
+<td><code>Errors</code></td>
+<td>실패 의미와 설명</td>
+</tr>
+</tbody>
+</table>
+<p><code>Contracts</code>, <code>Domain</code>, <code>Application</code>, <code>Workflow</code>, <code>Bootstrap</code>, <code>Hosts</code>, <code>Errors</code>의 책임 기준은
+<a href="../architecture/">Architecture</a>의 <code>코드 경계</code>와 <a href="../delivery-validation/">Delivery &amp; Validation</a>의
+test rule에서 더 자세히 설명합니다. 이 문서의 다음 절은 그중에서도 파일 위치를 자주 찾아야 하는
+외부 연결 코드를 조금 더 풀어 설명합니다.</p>
+<h3 id="3-3-testkit-dev-console">3-3. TestKit과 Dev Console<a class="headerlink" href="#3-3-testkit-dev-console" title="Permanent link">&para;</a></h3>
+<p>Dev 배포판의 QA 기능은 단순 test support가 아니라 제품 검증 기능입니다. Production source에서
+<code>Testing</code>이라는 포괄 이름을 쓰기보다, 기능 이름인 <code>TestKit</code> 또는 <code>DevConsole</code>로 드러냅니다.</p>
+<pre><code class="language-text">Contracts/RuntimeControl/TestKit/
+Adapters/Inbound/RuntimeControlAPI/DevConsole/
+Adapters/Inbound/RuntimeControlAPI/TestKit/
+Adapters/Inbound/MacControlPanel/Presentation/TestKit/
+Adapters/Outbound/MacRuntimeControlClient/TestKit/
+</code></pre>
+<h2 id="4">4. 자주 들어가는 외부 연결 코드<a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
+<p>Helper를 고칠 때 외부와 연결되는 코드 중 자주 들어가는 곳은 세 군데입니다. API를 고칠 때, Mac Helper
+화면을 고칠 때, Mac에서 파일이나 process를 읽고 쓰는 기능을 고칠 때입니다.</p>
+<p>세 곳을 나눠 두는 이유는 단순합니다. 화면이 할 일, API가 할 일, host에서 실제로 실행할 일을
+섞지 않기 위해서입니다. 이 구분이 무너지면 상태 의미가 흐려지고, 테스트도 어려워집니다.</p>
+<h3 id="4-1-runtime-control-api">4-1. Runtime Control API<a class="headerlink" href="#4-1-runtime-control-api" title="Permanent link">&para;</a></h3>
+<p>화면과 host runtime 사이에 오가는 API를 고칠 때 보는 곳입니다. PWA나 Helper app은 이 API를
+통해 status, event, recorder/bed activity를 읽고, start/update/repair 같은 명령을 요청합니다.</p>
+<pre><code class="language-text">Adapters/Inbound/RuntimeControlAPI/
+  Boundary/
+  Transport/
+  DevConsole/
+  TestKit/
+</code></pre>
+<p>이 폴더 안에서도 역할을 나눕니다. HTTP 요청/응답을 다루는 코드, API route를 고르는 코드,
+개발용 확인 화면, TestKit endpoint가 서로 섞이지 않게 합니다.</p>
+<table>
+<thead>
+<tr>
+<th>수정하려는 것</th>
+<th>먼저 볼 곳</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>API route 추가/변경</td>
+<td><code>Boundary/</code>와 endpoint catalog</td>
+</tr>
+<tr>
+<td>HTTP 요청/응답 처리</td>
+<td><code>Transport/</code></td>
+</tr>
+<tr>
+<td>개발용 확인 화면</td>
+<td><code>DevConsole/</code></td>
+</tr>
+<tr>
+<td>testkit endpoint</td>
+<td><code>TestKit/</code></td>
+</tr>
+<tr>
+<td>OpenAPI 문서</td>
+<td><code>docs/runtime/macos/runtime-control.openapi.json</code></td>
+</tr>
+</tbody>
+</table>
+<p>주의할 점은 API가 상태를 새로 만들면 안 된다는 것입니다. API는 이미 읽은 runtime 상태, event,
+recorder/bed activity를 response로 전달합니다.</p>
+<h3 id="4-2-mac-control-panel">4-2. Mac Control Panel<a class="headerlink" href="#4-2-mac-control-panel" title="Permanent link">&para;</a></h3>
+<p>Mac Helper app 화면을 고칠 때 보는 곳입니다. 버튼 문구, 상태 색상, 화면 배치, ViewModel 연결이
+여기에 있습니다.</p>
+<pre><code class="language-text">Adapters/Inbound/MacControlPanel/
+  Configuration/
+  Generated/
+  Presentation/
+    Copy/
+    Formatting/
+    Policies/
+    TestKit/
+    ViewModels/
+    Views/
+</code></pre>
+<p>화면 코드는 다시 작은 역할로 나눕니다. 문구는 Copy, 시간/byte 같은 표시는 Formatting,
+상태를 어떤 색과 문구로 보여줄지는 Policies, 화면 상태와 명령 연결은 ViewModels, 실제 SwiftUI
+화면은 Views에 둡니다.</p>
+<table>
+<thead>
+<tr>
+<th>수정하려는 것</th>
+<th>먼저 볼 곳</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>버튼/라벨 문구</td>
+<td><code>Presentation/Copy/</code></td>
+</tr>
+<tr>
+<td>시간, byte, URL 같은 표시 형식</td>
+<td><code>Presentation/Formatting/</code></td>
+</tr>
+<tr>
+<td>상태를 어떤 문구/색/행동으로 보일지</td>
+<td><code>Presentation/Policies/</code></td>
+</tr>
+<tr>
+<td>화면 상태와 command 연결</td>
+<td><code>Presentation/ViewModels/</code></td>
+</tr>
+<tr>
+<td>SwiftUI 화면</td>
+<td><code>Presentation/Views/</code></td>
+</tr>
+<tr>
+<td>release version/generated 값</td>
+<td><code>Generated/</code></td>
+</tr>
+<tr>
+<td>host 설정 한계값</td>
+<td><code>Configuration/</code></td>
+</tr>
+</tbody>
+</table>
+<p>주의할 점은 화면이 상태를 직접 만들면 안 된다는 것입니다. 화면은 ViewModel이 가진 명시 상태를
+읽고, 사람이 이해할 수 있는 문구와 action으로 바꿉니다.</p>
+<h3 id="4-3-mac-runtime-control-client">4-3. Mac Runtime Control Client<a class="headerlink" href="#4-3-mac-runtime-control-client" title="Permanent link">&para;</a></h3>
+<p>Mac에서 실제로 파일을 읽거나, command를 실행하거나, log를 모으거나, settings를 저장하는 기능을
+고칠 때 보는 곳입니다. 화면이나 API보다 바깥 세계에 더 가까운 코드입니다.</p>
+<pre><code class="language-text">Adapters/Outbound/MacRuntimeControlClient/
+  Backups/
+  Client/
+  Commands/
+  Environment/
+  Logs/
+  Reads/
+  Settings/
+  TestKit/
+</code></pre>
+<p>이 영역은 실패를 가장 조심해야 합니다. 파일이 없으면 missing, 권한 문제가 있으면 failed,
+정상적으로 읽었는데 결과가 없으면 empty로 전달해야 합니다.</p>
+<table>
+<thead>
+<tr>
+<th>수정하려는 것</th>
+<th>먼저 볼 곳</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>backup 목록/생성/삭제</td>
+<td><code>Backups/</code></td>
+</tr>
+<tr>
+<td>runtime command 실행</td>
+<td><code>Commands/</code></td>
+</tr>
+<tr>
+<td>host 환경과 URL 계산</td>
+<td><code>Environment/</code></td>
+</tr>
+<tr>
+<td>log 읽기/export</td>
+<td><code>Logs/</code></td>
+</tr>
+<tr>
+<td>status, diagnostics, file read</td>
+<td><code>Reads/</code></td>
+</tr>
+<tr>
+<td>settings 읽기/쓰기</td>
+<td><code>Settings/</code></td>
+</tr>
+<tr>
+<td>testkit control</td>
+<td><code>TestKit/</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="5">5. 문서 노출 기준<a class="headerlink" href="#5" title="Permanent link">&para;</a></h2>
+<p>Release 문서는 운영자가 바로 판단해야 하는 내용을 다룹니다. Dev 문서는 그 판단 뒤의 구조와
+계약을 설명합니다.</p>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>노출 위치</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Vital Server Helper</td>
+<td>release</td>
+<td>release 문서의 최상위 서비스명</td>
+</tr>
+<tr>
+<td>Health Check</td>
+<td>release</td>
+<td>Vital Server Helper가 제공하는 기능</td>
+</tr>
+<tr>
+<td>Runtime Control API</td>
+<td>dev 중심</td>
+<td>UI와 host runtime 사이의 API</td>
+</tr>
+<tr>
+<td>Linux VM guest stack</td>
+<td>dev 중심</td>
+<td>같은 service 묶음을 실행하는 guest 환경</td>
+</tr>
+<tr>
+<td>wrapper/preload</td>
+<td>dev 중심</td>
+<td>Vital Server를 guest에서 실행하기 위한 입력</td>
+</tr>
+<tr>
+<td>devtools</td>
+<td>dev 중심</td>
+<td>packaging/build machine tooling</td>
+</tr>
+</tbody>
+</table>
+<h3 id="5-1-release">5-1. Release 문서에 쓰는 것<a class="headerlink" href="#5-1-release" title="Permanent link">&para;</a></h3>
+<p>Release 문서는 “사용자가 지금 무엇을 해야 하는가”를 설명합니다.</p>
+<table>
+<thead>
+<tr>
+<th>예시</th>
+<th>이유</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>설치, 실행, update, clean uninstall</td>
+<td>운영자가 직접 수행하는 절차</td>
+</tr>
+<tr>
+<td>Health Check 상태 의미</td>
+<td>운영자가 화면에서 바로 판단해야 함</td>
+</tr>
+<tr>
+<td>지원 범위와 제한</td>
+<td>도입 전 판단에 필요</td>
+</tr>
+<tr>
+<td>runtime status reference</td>
+<td>화면에서 보이는 상태를 해석해야 함</td>
+</tr>
+</tbody>
+</table>
+<h3 id="5-2-dev">5-2. Dev 문서에 쓰는 것<a class="headerlink" href="#5-2-dev" title="Permanent link">&para;</a></h3>
+<p>Dev 문서는 “왜 그렇게 만들었고, 어디를 고쳐야 하는가”를 설명합니다.</p>
+<table>
+<thead>
+<tr>
+<th>예시</th>
+<th>이유</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Host/Guest/PWA 구조</td>
+<td>구현 판단과 platform 확장 기준</td>
+</tr>
+<tr>
+<td>Runtime Contract</td>
+<td>상태 단어와 API 의미를 고정</td>
+</tr>
+<tr>
+<td>Repository Map</td>
+<td>코드 위치와 책임 경계 안내</td>
+</tr>
+<tr>
+<td>Delivery &amp; Validation</td>
+<td>변경별 검증 기준</td>
+</tr>
+</tbody>
+</table>
+<h3 id="5-3-docs-site-docs">5-3. docs와 site-docs 구분<a class="headerlink" href="#5-3-docs-site-docs" title="Permanent link">&para;</a></h3>
+<p><code>site-docs/</code>는 읽기 쉬운 공개 site 문서입니다. <code>docs/</code>는 상세 설계, API, ADR,
+troubleshooting처럼 더 깊은 reference를 담습니다.</p>
+<p>같은 내용을 두 곳에 반복하지 않습니다. release/dev site 문서에서는 판단과 흐름을 설명하고,
+세부 파일명, API spec, ADR, 긴 장애 기록은 <code>docs/</code>로 연결합니다.</p>
+<h2 id="6">6. 변경할 때 지킬 것<a class="headerlink" href="#6" title="Permanent link">&para;</a></h2>
+<p>변경 전에 먼저 “이 변경은 상태를 말하는가, 판단하는가, 실행하는가, 표시하는가”를 나눕니다.</p>
+<h3 id="6-1">6-1. 공통 기준<a class="headerlink" href="#6-1" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>기준</th>
+<th>확인할 것</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>상태 소유자</td>
+<td>이 상태를 누가 명시적으로 제공하는가</td>
+</tr>
+<tr>
+<td>실패 의미</td>
+<td>missing, failed, invalid, stale, empty가 섞이지 않는가</td>
+</tr>
+<tr>
+<td>위치</td>
+<td>UI, contract, domain, workflow, 외부 연결 코드 중 어디 책임인가</td>
+</tr>
+<tr>
+<td>테스트</td>
+<td>정상 흐름뿐 아니라 실패/부재/오래됨을 확인했는가</td>
+</tr>
+<tr>
+<td>문서</td>
+<td>운영 rule이나 contract 의미가 바뀌면 문서도 바뀌었는가</td>
+</tr>
+</tbody>
+</table>
+<h3 id="6-2">6-2. 변경 유형별 기준<a class="headerlink" href="#6-2" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>변경</th>
+<th>지킬 것</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>UI 표시 변경</td>
+<td>UI는 상태를 만들지 않고, 받은 상태를 표시</td>
+</tr>
+<tr>
+<td>API 변경</td>
+<td>OpenAPI, schema, PWA/Swift client, contract test를 함께 확인</td>
+</tr>
+<tr>
+<td>status/read 변경</td>
+<td>read failure를 empty success로 바꾸지 않음</td>
+</tr>
+<tr>
+<td>update/recovery/repair 변경</td>
+<td>Workflow에 순서와 진행 상태를 두고 실패 event를 남김</td>
+</tr>
+<tr>
+<td>packaging 변경</td>
+<td>release artifact, install/update/uninstall 문서를 함께 확인</td>
+</tr>
+<tr>
+<td>testkit 변경</td>
+<td>검증 기능이 product-facing QA 기능이라는 점을 유지</td>
+</tr>
+</tbody>
+</table>
+<h3 id="6-3">6-3. 피해야 할 것<a class="headerlink" href="#6-3" title="Permanent link">&para;</a></h3>
+<ul>
+<li>UI에서 domain state를 만들어내기</li>
+<li>Host가 Guest 내부 상태를 로그나 파일명으로 추측하기</li>
+<li>permission failure나 decode failure를 빈 결과로 바꾸기</li>
+<li>모든 책임을 하나의 router, view model, lifecycle 파일에 몰아넣기</li>
+<li>unreleased behavior를 compatibility라는 이름으로 오래 끌고 가기</li>
+</ul>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../backup-restore-contracts/" class="btn btn-neutral float-left" title="Backup/Restore 계약"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../delivery-validation/" class="btn btn-neutral float-right" title="Delivery & Validation">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/tirosh-chain/tirosh-vitalserver" class="fa fa-code-fork" style="color: #fcfcfc"> tirosh-chain/tirosh-vitalserver</a>
+        </span>
+    
+    
+      <span><a href="../backup-restore-contracts/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../delivery-validation/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

@@ -1,324 +1,369 @@
 <!DOCTYPE html>
-<html lang="en" data-bs-theme="light">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        
-        
-        <link rel="canonical" href="https://tirosh-chain.github.io/vitalserver-helper/dev/architecture/">
-        <link rel="shortcut icon" href="../../img/favicon.ico">
-        <title>Architecture - Vital Server Helper</title>
-        <link href="../../css/bootstrap.min.css" rel="stylesheet">
-        <link href="../../css/fontawesome.min.css" rel="stylesheet">
-        <link href="../../css/brands.min.css" rel="stylesheet">
-        <link href="../../css/solid.min.css" rel="stylesheet">
-        <link href="../../css/v4-font-face.min.css" rel="stylesheet">
-        <link href="../../css/base.css" rel="stylesheet">
-        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
-        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
-        <script>hljs.highlightAll();</script> 
-    </head>
-
-    <body>
-        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
-            <div class="container">
-                <a class="navbar-brand" href="../..">Vital Server Helper</a>
-                <!-- Expander button -->
-                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <!-- Expanded navigation -->
-                <div id="navbar-collapse" class="navbar-collapse collapse">
-                        <!-- Main navigation -->
-                        <ul class="nav navbar-nav">
-                            <li class="nav-item">
-                                <a href="../.." class="nav-link">Home</a>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Release</a>
-                                <ul class="dropdown-menu">
-                                    
-<li>
-    <a href="../../release/" class="dropdown-item">Overview</a>
-</li>
-                                    
-<li>
-    <a href="../../release/background/" class="dropdown-item">Research Background</a>
-</li>
-                                    
-<li>
-    <a href="../../release/mac-hardware-appliance/" class="dropdown-item">Why Mac Hardware</a>
-</li>
-                                    
-<li>
-    <a href="../../release/health-check-service/" class="dropdown-item">Vital Server Helper Health Check</a>
-</li>
-                                    
-<li>
-    <a href="../../release/deployment-modes/" class="dropdown-item">Deployment Modes</a>
-</li>
-                                    
-<li>
-    <a href="../../release/installation/" class="dropdown-item">Installation</a>
-</li>
-                                    
-<li>
-    <a href="../../release/operation/" class="dropdown-item">Operation</a>
-</li>
-                                    
-<li>
-    <a href="../../release/troubleshooting/" class="dropdown-item">Troubleshooting</a>
-</li>
-                                    
-<li>
-    <a href="../../release/release-notes/" class="dropdown-item">Release Notes</a>
-</li>
-                                </ul>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle active" aria-current="page" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Dev</a>
-                                <ul class="dropdown-menu">
-                                    
-<li>
-    <a href="../" class="dropdown-item">Overview</a>
-</li>
-                                    
-<li>
-    <a href="../service-catalog/" class="dropdown-item">Service Catalog</a>
-</li>
-                                    
-<li>
-    <a href="../package-map/" class="dropdown-item">Package Map</a>
-</li>
-                                    
-<li>
-    <a href="./" class="dropdown-item active" aria-current="page">Architecture</a>
-</li>
-                                    
-<li>
-    <a href="../health-check-contract/" class="dropdown-item">Health Check Contract</a>
-</li>
-                                    
-<li>
-    <a href="../api-contracts/" class="dropdown-item">API Contracts</a>
-</li>
-                                    
-<li>
-    <a href="../build-and-release/" class="dropdown-item">Build and Release</a>
-</li>
-                                    
-<li>
-    <a href="../testing/" class="dropdown-item">Testing</a>
-</li>
-                                    
-<li>
-    <a href="../troubleshooting/" class="dropdown-item">Troubleshooting</a>
-</li>
-                                </ul>
-                            </li>
-                        </ul>
-
-                    <ul class="nav navbar-nav ms-md-auto">
-                        <li class="nav-item">
-                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
-                                <i class="fa fa-search"></i> Search
-                            </a>
-                        </li>
-                            <li class="nav-item">
-                                <a rel="prev" href="../package-map/" class="nav-link">
-                                    <i class="fa fa-arrow-left"></i> Previous
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a rel="next" href="../health-check-contract/" class="nav-link">
-                                    Next <i class="fa fa-arrow-right"></i>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="https://github.com/tirosh-chain/tirosh-vitalserver/edit/master/docs/dev/architecture.md" class="nav-link">Edit on tirosh-chain/tirosh-vitalserver
-                                    </a>
-                            </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <div class="container">
-            <div class="row">
-                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
-    <div class="navbar-header">
-        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
-            <span class="fa fa-angle-down"></span>
-        </button>
-    </div>
-
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://tirosh-chain.github.io/vitalserver-helper/dev/architecture/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Architecture - Vital Server Helper</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
     
-    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
-        <ul class="nav flex-column">
-            
-            <li class="nav-item" data-bs-level="1"><a href="#architecture" class="nav-link">Architecture</a>
-              <ul class="nav flex-column">
-            <li class="nav-item" data-bs-level="2"><a href="#_1" class="nav-link">핵심 구조</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-bs-level="2"><a href="#linux-vm" class="nav-link">Linux VM 선택 이유</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-bs-level="2"><a href="#upstream-compatibility-evidence" class="nav-link">Upstream compatibility evidence</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-bs-level="2"><a href="#linux-guest-strength" class="nav-link">Linux guest strength</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-bs-level="2"><a href="#host-platform-strengths" class="nav-link">Host platform strengths</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-bs-level="2"><a href="#pwa" class="nav-link">PWA 선택 이유</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-bs-level="2"><a href="#source-of-truth" class="nav-link">Source of truth</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-              </ul>
-            </li>
-        </ul>
-    </div>
-</div></div>
-                    <div class="col-md-9" role="main">
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Architecture";
+        var mkdocs_page_input_path = "dev/architecture.md";
+        var mkdocs_page_url = "/vitalserver-helper/dev/architecture/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
 
-<h1 id="architecture">Architecture<a class="headerlink" href="#architecture" title="Permanent link">&para;</a></h1>
-<p>Vital Server Helper는 host platform과 service appliance를 분리합니다.</p>
-<p>Mac hardware appliance는 1차 현장 배포 target입니다. Linux VM은 macOS/Linux/Windows
-host 어디서든 동일한 Vital Server Helper service appliance를 실행하기 위한 guest
-표준화 계층입니다. PWA는 host별 native UI 중복을 피하고 같은 Runtime Control UI를
-제공하기 위한 primary UI입니다.</p>
-<h2 id="_1">핵심 구조<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<pre><code class="language-text">Browser / PWA / Native shell
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Vital Server Helper
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Release</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../release/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../release/usage/">Usage</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../release/clean-uninstall/">Clean Uninstall</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../release/reset-installer/">Reset Installer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../release/scope/">Support Scope</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../release/runtime-status/">Runtime Status</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../release/observability-events/">Observability Events</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Dev</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../">Overview</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Architecture</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#1">1. 목표</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#1-1">1-1. 풀려는 문제</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#1-2">1-2. 실행 방식</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#2">2. 전체 그림</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#2-1">2-1. 용어</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#2-2">2-2. 구성 요소</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#2-3">2-3. 누가 무엇을 하나</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#2-4">2-4. 명령이 내려갈 때</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#2-5">2-5. 상태가 올라올 때</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#2-6">2-6. 이렇게 나누는 이유</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#3-guest">3. Guest</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#3-1-linux-vm">3-1. Linux VM을 쓰는 이유</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#3-2-vitalserver">3-2. VitalServer 연결 입력</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#3-3-guest">3-3. Guest 경계</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#4-host">4. Host</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#4-1-host">4-1. Host별 맡는 일</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#4-2-mac">4-2. Mac부터 보는 이유</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#4-3-host">4-3. Host 선택의 경계</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#5-ui">5. UI</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#5-1-pwa">5-1. PWA를 쓰는 이유</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#5-2-runtime-control-api">5-2. Runtime Control API 역할</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#6">6. 코드 경계</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#6-1-layer">6-1. Layer 책임</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#6-2">6-2. 경계 규칙</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../runtime-contracts/">Runtime Contracts</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../backup-restore-contracts/">Backup/Restore 계약</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../repository-map/">Repository Map</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../delivery-validation/">Delivery & Validation</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Vital Server Helper</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Dev</li>
+      <li class="breadcrumb-item active">Architecture</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/tirosh-chain/tirosh-vitalserver/edit/master/docs/dev/architecture.md">Edit on tirosh-chain/tirosh-vitalserver</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="architecture">Architecture<a class="headerlink" href="#architecture" title="Permanent link">&para;</a></h1>
+<p>Vital Server Helper는 VitalServer를 더 쉽게 운영하고 지원하기 위한 프로그램입니다.</p>
+<p>이 문서는 코드 구조를 설명하지만, 먼저 제품 관점에서 읽을 수 있게 정리합니다. 핵심은
+간단합니다. 사용자가 보는 화면, Mac/PC가 맡는 일, VM 안에서 돌아가는 service를 나누고,
+각자가 알고 있는 상태만 말하게 합니다.</p>
+<h2 id="1">1. 목표<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
+<p>Vital Server Helper는 병원 내부망 가까이에 놓인 작은 운영 장비를 전제로 합니다. 이 장비는
+오래 켜져 있어야 하고, 문제가 생겼을 때 상태와 로그를 빠르게 확인할 수 있어야 합니다.</p>
+<h3 id="1-1">1-1. 풀려는 문제<a class="headerlink" href="#1-1" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>필요한 일</th>
+<th>구조에서의 대응</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>병원 내부망 가까이에서 실행</td>
+<td>Mac/PC 같은 host 장비에서 runtime을 관리</td>
+</tr>
+<tr>
+<td>Recorder 접속 상태 확인</td>
+<td>observer가 recorder activity를 모아 상태로 제공</td>
+</tr>
+<tr>
+<td>장애 조사 자료 수집</td>
+<td>status, event, log, support bundle을 분리해서 보관</td>
+</tr>
+<tr>
+<td>네트워크가 제한된 환경 지원</td>
+<td>offline update bundle과 검증 절차 제공</td>
+</tr>
+<tr>
+<td>OS마다 화면을 새로 만들지 않기</td>
+<td>PWA와 Runtime Control API를 공통 화면/계약으로 사용</td>
+</tr>
+</tbody>
+</table>
+<h3 id="1-2">1-2. 실행 방식<a class="headerlink" href="#1-2" title="Permanent link">&para;</a></h3>
+<p>현재 사전 검증용 release는 Helper-managed runtime을 중심으로 다룹니다. 이 방식에서는
+Helper가 VM, proxy, service, update, recovery를 함께 관리합니다.</p>
+<p>이미 운영 중인 VitalServer에 연결하는 <code>External VitalServer mode</code>는 지원 예정 범위입니다.
+이 방식은 기존 VitalServer를 대체하지 않고, 상태 확인, recorder/bed 관측, 로그/지원 자료
+수집을 제공하는 방향입니다.</p>
+<p>두 방식은 같은 화면을 사용할 수 있어도 확인할 수 있는 정보가 다릅니다. Helper가 직접
+관리하는 VM은 lifecycle까지 볼 수 있지만, 기존 VitalServer에 연결하는 경우에는 연결 대상이
+제공한 상태만 믿어야 합니다.</p>
+<h2 id="2">2. 전체 그림<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
+<p>Vital Server Helper는 역할을 크게 네 부분으로 나눕니다.</p>
+<ol>
+<li>사용자가 보는 화면</li>
+<li>Mac/PC 같은 host에서 실행되는 관리 기능</li>
+<li>VM을 실행하고 연결하는 기능</li>
+<li>VM 안에서 동작하는 VitalServer 주변 service</li>
+</ol>
+<p>이렇게 나누는 이유는 단순합니다. 화면은 상태를 보여주고 명령을 요청합니다. Host는 VM과
+파일, 권한, proxy 같은 host 일을 처리합니다. VM 안의 service는 VitalServer 주변에서 실제
+관측과 저장을 담당합니다.</p>
+<p>현장에서 문제가 생기면 “화면이 잘못 보이는지”, “Host가 VM을 다루지 못하는지”, “VM 안 service가
+상태를 만들지 못하는지”를 빠르게 나눠 봐야 합니다. 역할을 나누면 장애 위치를 더 빨리 좁힐 수
+있고, update나 repair도 필요한 범위만 조심스럽게 다룰 수 있습니다.</p>
+<h3 id="2-1">2-1. 용어<a class="headerlink" href="#2-1" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>용어</th>
+<th>이 문서에서의 뜻</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Host</td>
+<td>Helper가 설치된 Mac/PC</td>
+</tr>
+<tr>
+<td>Guest</td>
+<td>Host 안에서 실행되는 Linux VM</td>
+</tr>
+<tr>
+<td>Runtime Control API</td>
+<td>화면과 Helper runtime 사이의 약속된 API</td>
+</tr>
+<tr>
+<td>PWA</td>
+<td>browser에서 열 수 있는 Runtime Control UI</td>
+</tr>
+<tr>
+<td>Observer</td>
+<td>recorder/bed 상태를 읽어 runtime 상태로 정리하는 service</td>
+</tr>
+<tr>
+<td>조회용 상태</td>
+<td>UI가 읽기 좋게 정리된 상태 문서나 저장소</td>
+</tr>
+</tbody>
+</table>
+<h3 id="2-2">2-2. 구성 요소<a class="headerlink" href="#2-2" title="Permanent link">&para;</a></h3>
+<pre><code class="language-text">PWA / Helper app
   -&gt; Runtime Control API
-      -&gt; Host runtime adapter
-          -&gt; VM provider
-              -&gt; Linux guest service stack
-                  -&gt; VitalServer wrapper
+      -&gt; Host runtime
+          -&gt; VM
+              -&gt; Linux guest services
+                  -&gt; Vital Server wrapper
                   -&gt; Redis
                   -&gt; Audit Proxy
-                  -&gt; VitalDB Observer
+                  -&gt; Recorder Observer
                   -&gt; Testkit API
 </code></pre>
-<h2 id="linux-vm">Linux VM 선택 이유<a class="headerlink" href="#linux-vm" title="Permanent link">&para;</a></h2>
-<p>Linux VM은 host OS를 Linux로 한정하기 위한 선택이 아닙니다.</p>
-<p>Linux VM은 macOS/Linux/Windows 어디서든 동일한 Vital Server Helper service appliance를
-실행하기 위한 guest 표준화 계층입니다. upstream VitalServer의 Windows 중심 전제는
-wrapper와 guest service stack에서 흡수하고, host별 차이는 VM provider adapter가
-처리합니다.</p>
-<h2 id="upstream-compatibility-evidence">Upstream compatibility evidence<a class="headerlink" href="#upstream-compatibility-evidence" title="Permanent link">&para;</a></h2>
-<p>upstream VitalServer는 Linux native compatible이라고 보기 어렵습니다.</p>
+<h3 id="2-3">2-3. 누가 무엇을 하나<a class="headerlink" href="#2-3" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
-<th>근거</th>
-<th>의미</th>
+<th>구성 요소</th>
+<th>하는 일</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>vendor/vitalserver/vitalserver-old/server_start.bat</code></td>
-<td>upstream 실행 스크립트가 Windows batch 기준</td>
+<td>PWA / Helper app</td>
+<td>운영자가 보는 화면을 제공</td>
 </tr>
 <tr>
-<td><code>vendor/vitalserver/vitalserver-old/install/*.msi</code></td>
-<td>Node와 Redis 설치물이 Windows MSI 기준</td>
+<td>Runtime Control API</td>
+<td>화면이 runtime 상태와 명령을 같은 방식으로 다루게 함</td>
 </tr>
 <tr>
-<td><code>vendor/vitalserver/vitalserver-old/service/include/config.js</code></td>
-<td>기본 저장 경로가 <code>Z:/</code> drive 기준</td>
+<td>Host runtime</td>
+<td>VM, proxy, 파일, 권한, update, recovery를 관리</td>
 </tr>
 <tr>
-<td><code>apps/vitalserver/docker/Dockerfile</code></td>
-<td>Linux container 안에 <code>Z:</code> symlink를 만들어 upstream path 전제를 흡수</td>
+<td>VM</td>
+<td>VitalServer 주변 service가 같은 Linux 환경에서 실행되게 함</td>
 </tr>
 <tr>
-<td><code>apps/vitalserver/runtime/node-preload.js</code></td>
-<td>Redis host/port, CPU-count assumption, admin password 같은 runtime 전제를 보정</td>
+<td>Linux guest services</td>
+<td>Redis, observer, audit proxy, testkit, Vital Server wrapper 실행</td>
 </tr>
 </tbody>
 </table>
-<p>따라서 Linux VM은 upstream이 Linux 친화적이라서 선택된 것이 아닙니다. Windows-oriented
-upstream을 제품용 Linux guest service stack으로 정규화하고, 그 guest를 여러 host
-platform에서 동일하게 운영하기 위한 선택입니다.</p>
-<h2 id="linux-guest-strength">Linux guest strength<a class="headerlink" href="#linux-guest-strength" title="Permanent link">&para;</a></h2>
-<p>Linux guest는 Vital Server Helper backend service stack을 고정하기 좋은 runtime substrate입니다.</p>
+<p>각 구성 요소는 자기 일이 아닌 상태를 추측하지 않습니다. 예를 들어 화면은 recorder 상태를
+직접 만들지 않고, API가 제공한 상태를 표시합니다. Host도 Guest 내부 상태를 로그나 파일명으로
+짐작하지 않고, Guest가 제공한 상태 문서를 읽습니다.</p>
+<h3 id="2-4">2-4. 명령이 내려갈 때<a class="headerlink" href="#2-4" title="Permanent link">&para;</a></h3>
+<p>운영자가 시작, 중지, update, repair 같은 명령을 누르면 흐름은 아래처럼 내려갑니다.</p>
+<pre><code class="language-text">화면
+  -&gt; Runtime Control API
+      -&gt; Host runtime
+          -&gt; VM / launchd / filesystem / proxy
+</code></pre>
+<p>화면은 명령을 요청하고 결과를 보여줍니다. 실제로 process를 실행하거나 파일을 바꾸거나 VM을
+조작하는 일은 Host 쪽에서 처리합니다.</p>
+<h3 id="2-5">2-5. 상태가 올라올 때<a class="headerlink" href="#2-5" title="Permanent link">&para;</a></h3>
+<p>상태는 한 줄로 이어지지 않습니다. Runtime 상태 변화와 실패는 status와 event로 남고,
+recorder/bed 관측은 별도 activity로 정리됩니다. Runtime Control API는 이 자료를 모아서
+화면에 전달합니다.</p>
+<pre><code class="language-text">runtime status + runtime events
+recorder/bed activity
+  -&gt; Runtime Control API
+  -&gt; 화면
+</code></pre>
+<p>상태가 없다는 것과, 읽기에 실패했다는 것과, 값이 오래되었다는 것은 다른 의미입니다.
+그래서 Helper는 missing, failed, stale, empty 같은 상태를 서로 바꾸지 않습니다.</p>
+<h3 id="2-6">2-6. 이렇게 나누는 이유<a class="headerlink" href="#2-6" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
-<th>강점</th>
-<th>설명</th>
+<th>나눈 것</th>
+<th>얻는 점</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>backend service appliance 운영체제</td>
-<td>desktop OS가 아니라 VitalServer backend stack을 고정하는 guest runtime으로 사용</td>
+<td>화면과 runtime</td>
+<td>PWA, Helper app, remote console이 같은 API를 쓸 수 있음</td>
 </tr>
 <tr>
-<td>container/service 생태계</td>
-<td>Docker/Compose, nginx, Redis, Node service, sidecar, observer, testkit을 같은 guest 기준으로 묶기 쉬움</td>
+<td>Host와 Guest</td>
+<td>macOS/Linux/Windows 차이가 VM 안 service로 새지 않음</td>
 </tr>
 <tr>
-<td>headless service 운영</td>
-<td>systemd, journald, timer, log collection, file permission, mount, network namespace 같은 운영 모델이 명확함</td>
+<td>VM 실행과 service 실행</td>
+<td>Apple Virtualization, KVM/QEMU, Hyper-V 차이를 host 쪽에 가둘 수 있음</td>
 </tr>
 <tr>
-<td>image/update 재현성</td>
-<td>golden rootfs, cloud-init, Docker image bundle, offline update bundle과 잘 맞음</td>
+<td>상태 생산과 표시</td>
+<td>UI가 상태를 임의로 만들지 않음</td>
 </tr>
 <tr>
-<td>upstream 보정 단일화</td>
-<td>Windows path, Windows installer, Redis host, CPU-count assumption을 각 host별로 고치지 않고 guest wrapper/preload에서 흡수</td>
+<td>판단과 실행</td>
+<td>update, recovery, repair를 테스트 가능한 판단과 실제 실행으로 나눌 수 있음</td>
 </tr>
 </tbody>
 </table>
-<h2 id="host-platform-strengths">Host platform strengths<a class="headerlink" href="#host-platform-strengths" title="Permanent link">&para;</a></h2>
-<p>Host platform은 VM provider, 설치, 권한, proxy, update entrypoint를 담당합니다.</p>
-<table>
-<thead>
-<tr>
-<th>Host</th>
-<th>강점</th>
-<th>Runtime 책임</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>macOS</td>
-<td>Mac hardware appliance 운영, DMG/PKG, launchd, Apple Virtualization, local Helper app, code signing/notarization</td>
-<td>VM lifecycle, host proxy, permission, file picker, update/recovery entrypoint</td>
-</tr>
-<tr>
-<td>Linux</td>
-<td>KVM/QEMU/libvirt, server-friendly networking, systemd, container runtime 접근성</td>
-<td>VM lifecycle, network bridge/NAT, service manager integration, filesystem sharing</td>
-</tr>
-<tr>
-<td>Windows</td>
-<td>병원/기업 IT의 AD/GPO/Intune/SCCM 친화성, Windows Service, Hyper-V, firewall/endpoint security 정책 연동</td>
-<td>VM lifecycle, Windows Service, firewall/NAT, enterprise management integration</td>
-</tr>
-</tbody>
-</table>
-<p>Host별 VM provider 특성은 다릅니다. guest service stack과 Health Check contract는 같게
-유지하고, lifecycle/network/filesystem/permission 차이는 host adapter가 흡수합니다.</p>
-<h2 id="pwa">PWA 선택 이유<a class="headerlink" href="#pwa" title="Permanent link">&para;</a></h2>
-<p>PWA는 제품 UI를 host OS에 묶지 않기 위한 선택입니다.</p>
+<p>예를 들어 화면에서 recorder가 stale로 보일 때 UI가 직접 ping을 날려 상태를 바꾸면 원인을
+추적하기 어려워집니다. 대신 observer가 관측한 activity와 runtime 상태 자료를 API가 전달하고,
+화면은 그 결과를 그대로 보여줍니다. 이렇게 하면 “관측이 없어서 stale인지”, “관측 자료를 읽지
+못해서 failed인지”를 분리해서 볼 수 있습니다.</p>
+<h2 id="3-guest">3. Guest<a class="headerlink" href="#3-guest" title="Permanent link">&para;</a></h2>
+<p>Guest는 VM 안에서 실행되는 Linux 환경입니다. Linux VM은 host OS를 Linux로 한정하기 위한 선택이
+아닙니다. macOS, Linux, Windows host 위에서도 같은 service 묶음을 실행하기 위한 기준점입니다.</p>
+<h3 id="3-1-linux-vm">3-1. Linux VM을 쓰는 이유<a class="headerlink" href="#3-1-linux-vm" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -328,109 +373,271 @@ platform에서 동일하게 운영하기 위한 선택입니다.</p>
 </thead>
 <tbody>
 <tr>
-<td>cross-platform 운영 UI</td>
-<td>macOS/Linux/Windows host마다 native UI를 중복 구현하지 않고 같은 Runtime Control UI를 제공</td>
+<td>같은 실행 환경</td>
+<td>host OS가 달라도 같은 service 묶음을 실행할 수 있음</td>
 </tr>
 <tr>
-<td>local/remote control 통합</td>
-<td>local runtime control과 병원 outbound 허용 시 remote/cloud control을 같은 API contract 뒤에 둠</td>
+<td>service 운영에 적합</td>
+<td>Docker/Compose, nginx, Redis, Node service를 같은 기준으로 묶기 쉬움</td>
 </tr>
 <tr>
-<td>현장 접근성</td>
-<td>Mac 앞이 아니라 병원 내부 PC, tablet, phone browser에서도 상태와 로그를 확인</td>
+<td>headless 운영</td>
+<td>systemd, journald, permission, network 설정이 service 운영에 익숙함</td>
 </tr>
 <tr>
-<td>native shell 책임 축소</td>
-<td>native shell은 설치, 권한, tray/menu, file picker, recovery 같은 host-specific 기능만 담당</td>
+<td>update 재현성</td>
+<td>rootfs, cloud-init, Docker image bundle, offline update bundle과 잘 맞음</td>
+</tr>
+<tr>
+<td>입력 명시화</td>
+<td>storage path, Redis host, CPU count, credential 같은 값을 명시적으로 넘김</td>
 </tr>
 </tbody>
 </table>
-<h2 id="source-of-truth">Source of truth<a class="headerlink" href="#source-of-truth" title="Permanent link">&para;</a></h2>
-<p>Runtime 상태와 VitalDB observation은 guest와 host가 명시적으로 생산한 문서를 통해 전달됩니다.</p>
-<pre><code class="language-text">vitaldb-observer
-  -&gt; guest runtime-state.json
-  -&gt; watchdog/runtime
-  -&gt; runtime-status.json
-  -&gt; runtime-events.jsonl
-  -&gt; runtime-observability.sqlite
-  -&gt; Runtime Control API / PWA
-</code></pre>
-<p>Log, filename, missing file, old command output에서 domain state를 추측하지 않습니다.</p></div>
+<p>VM을 쓰면 구조가 조금 무거워지지만, 현장마다 다른 host OS 차이를 줄일 수 있습니다. VitalServer
+주변 service를 같은 Linux 환경에서 실행하면 Redis, proxy, observer, log 수집 방식을 더 일정하게
+가져갈 수 있습니다. host가 macOS인지 Windows인지는 VM을 실행하고 연결하는 쪽의 문제로 남기고,
+guest 안의 service 묶음은 최대한 같은 방식으로 유지합니다.</p>
+<h3 id="3-2-vitalserver">3-2. VitalServer 연결 입력<a class="headerlink" href="#3-2-vitalserver" title="Permanent link">&para;</a></h3>
+<p>Vital Server Helper는 VitalServer가 제공하는 연구와 데이터 수집 기능을 전제로 합니다.
+Helper는 그 주변 운영에 필요한 입력을 명시적으로 연결합니다.</p>
+<table>
+<thead>
+<tr>
+<th>입력</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>시작 방식</td>
+<td>service를 어떤 명령으로 시작할지 정함</td>
+</tr>
+<tr>
+<td>실행에 필요한 구성</td>
+<td>Node, Redis, proxy, 보조 service 같은 실행 의존성</td>
+</tr>
+<tr>
+<td>저장 위치</td>
+<td><code>.vital</code> 파일이 저장되는 위치</td>
+</tr>
+<tr>
+<td>컨테이너 실행 묶음</td>
+<td>guest 안에서 VitalServer를 일관된 방식으로 실행</td>
+</tr>
+<tr>
+<td>실행 전 입력</td>
+<td>Redis host/port, CPU count, admin password 같은 실행 입력</td>
+</tr>
+</tbody>
+</table>
+<p>Linux VM은 VitalServer 자체의 목적을 바꾸기 위한 선택이 아닙니다. 현장에서 같은 운영 표면을
+제공하기 위한 실행 경계입니다.</p>
+<h3 id="3-3-guest">3-3. Guest 경계<a class="headerlink" href="#3-3-guest" title="Permanent link">&para;</a></h3>
+<p>Guest는 Host가 제공한 설정과 약속된 입력을 사용합니다. Host는 Guest 내부를 추측하지 않고,
+Guest가 만든 상태 문서와 API 응답만 읽습니다.</p>
+<h2 id="4-host">4. Host<a class="headerlink" href="#4-host" title="Permanent link">&para;</a></h2>
+<p>Host는 Helper가 설치된 Mac/PC입니다. Host는 VM 실행, 설치, 권한, proxy, update entrypoint를
+담당합니다.</p>
+<h3 id="4-1-host">4-1. Host별 맡는 일<a class="headerlink" href="#4-1-host" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Host</th>
+<th>강점</th>
+<th>맡는 일</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>macOS</td>
+<td>Mac 장비, DMG/PKG, launchd, Apple Virtualization, Helper app</td>
+<td>VM 시작/중지/복구, host proxy, 권한, file picker, update/recovery</td>
+</tr>
+<tr>
+<td>Linux</td>
+<td>KVM/QEMU/libvirt, systemd, server-friendly network</td>
+<td>VM 시작/중지/복구, network bridge/NAT, service manager, filesystem sharing</td>
+</tr>
+<tr>
+<td>Windows</td>
+<td>AD/GPO/Intune/SCCM, Windows Service, Hyper-V, firewall 정책</td>
+<td>VM 시작/중지/복구, Windows Service, firewall/NAT, 기업 관리 도구 연동</td>
+</tr>
+</tbody>
+</table>
+<h3 id="4-2-mac">4-2. Mac부터 보는 이유<a class="headerlink" href="#4-2-mac" title="Permanent link">&para;</a></h3>
+<p>현재 macOS runtime package는 Mac mini/Mac Studio 계열을 1차 검토 대상으로 둡니다. Mac이 모든
+서버 요구에 더 적합하다는 뜻은 아닙니다. 초기 검토와 검증 범위를 줄이기 위한 선택입니다.</p>
+<table>
+<thead>
+<tr>
+<th>이유</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>장비 종류가 제한적</td>
+<td>CPU, storage, network, thermal profile 조합을 줄일 수 있음</td>
+</tr>
+<tr>
+<td>반복 검증이 쉬움</td>
+<td>같은 하드웨어 계열에서 설치, update, 장애 대응 절차를 반복 확인하기 쉬움</td>
+</tr>
+<tr>
+<td>작은 장비</td>
+<td>별도 rack 없이 배치 가능한 소형 장비</td>
+</tr>
+<tr>
+<td>host 기능 통합</td>
+<td>Helper app, local proxy, packaging, permission, VM 시작/중지/복구를 같은 host 기준으로 다룸</td>
+</tr>
+</tbody>
+</table>
+<p>Mac을 먼저 본다는 것은 최종 platform을 Mac으로만 제한한다는 뜻이 아닙니다. 초기에는 장비 종류와
+OS 조합을 줄여 설치, update, sleep prevention, 권한, VM 실행 문제를 반복해서 검증하는 것이 더
+중요합니다. 이 범위가 안정되면 같은 구조를 Linux나 Windows host로 옮길 때 어느 부분이 host별
+차이인지 더 명확히 볼 수 있습니다.</p>
+<h3 id="4-3-host">4-3. Host 선택의 경계<a class="headerlink" href="#4-3-host" title="Permanent link">&para;</a></h3>
+<p>중앙 인프라, 대규모 HA, redundant PSU, ECC memory, hot-swap storage, IPMI/iDRAC class 원격
+관리, rack mounting, server vendor SLA가 핵심 요구라면 전통적인 server 또는 industrial PC가
+더 적합할 수 있습니다.</p>
+<p>macOS 자체는 주된 선택 이유가 아닙니다. macOS는 Mac 하드웨어 위에서 Helper app과 host
+runtime을 구동하기 위한 운영 환경입니다.</p>
+<h2 id="5-ui">5. UI<a class="headerlink" href="#5-ui" title="Permanent link">&para;</a></h2>
+<p>UI는 운영자가 상태를 보고 명령을 실행하는 표면입니다. Vital Server Helper는 PWA를 사용해
+host OS마다 같은 화면을 제공하려고 합니다.</p>
+<h3 id="5-1-pwa">5-1. PWA를 쓰는 이유<a class="headerlink" href="#5-1-pwa" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>이유</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>같은 화면</td>
+<td>macOS/Linux/Windows마다 화면을 새로 만들지 않아도 됨</td>
+</tr>
+<tr>
+<td>local/remote 확장</td>
+<td>local runtime control과 remote console을 같은 API 뒤에 둘 수 있음</td>
+</tr>
+<tr>
+<td>현장 접근성</td>
+<td>Mac 앞이 아니라 병원 내부 PC, tablet, phone browser에서도 상태 확인 가능</td>
+</tr>
+<tr>
+<td>native app 책임 축소</td>
+<td>Helper app은 설치, 권한, file picker, recovery 같은 host 기능에 집중</td>
+</tr>
+</tbody>
+</table>
+<p>PWA를 선택하면 화면과 host 기능을 분리할 수 있습니다. 화면은 Runtime Control API를 통해 상태와
+명령을 다루고, Helper app은 Mac에서만 필요한 설치, 권한, 파일 선택, 복구 기능에 집중합니다.
+이렇게 해야 나중에 remote console이나 다른 host UI가 필요해져도 같은 API 뒤에서 확장할 수
+있습니다.</p>
+<h3 id="5-2-runtime-control-api">5-2. Runtime Control API 역할<a class="headerlink" href="#5-2-runtime-control-api" title="Permanent link">&para;</a></h3>
+<p>Runtime Control API는 UI와 runtime 사이의 약속입니다. UI는 observer container나 Guest 내부를
+직접 읽지 않고, Runtime Control API가 제공한 상태를 표시합니다.</p>
+<h2 id="6">6. 코드 경계<a class="headerlink" href="#6" title="Permanent link">&para;</a></h2>
+<p>코드도 같은 원칙을 따릅니다. 상태를 만드는 곳, 판단하는 곳, 실제 실행하는 곳을 나눕니다.</p>
+<h3 id="6-1-layer">6-1. Layer 책임<a class="headerlink" href="#6-1-layer" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>코드 영역</th>
+<th>쉬운 설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Contracts</td>
+<td>주고받는 문서와 상태의 모양을 정함</td>
+</tr>
+<tr>
+<td>Domain/Core</td>
+<td>완전한 입력을 받아 판단 규칙을 계산</td>
+</tr>
+<tr>
+<td>Application/Usecase</td>
+<td>어떤 명령과 결과가 필요한지 결정</td>
+</tr>
+<tr>
+<td>Workflow</td>
+<td>update, recovery 같은 긴 작업의 순서와 진행 상태를 관리</td>
+</tr>
+<tr>
+<td>Adapters</td>
+<td>API, 파일, process, network 같은 바깥 세계와 연결</td>
+</tr>
+<tr>
+<td>Bootstrap</td>
+<td>앱이 시작될 때 필요한 설정, 경로, 구현 연결을 묶음</td>
+</tr>
+<tr>
+<td>Hosts</td>
+<td>process 시작, signal, host 파일 같은 실행 경계를 연결</td>
+</tr>
+</tbody>
+</table>
+<h3 id="6-2">6-2. 경계 규칙<a class="headerlink" href="#6-2" title="Permanent link">&para;</a></h3>
+<p>상태는 임의로 판단하지 않습니다. 상태 소유자가 제공한 state, event, document, command result만
+사용합니다. missing, invalid, failed, stale, empty는 서로 다른 의미로 유지합니다.</p>
+<p>Domain/Core는 파일, process, network, log를 직접 읽지 않습니다. 실제 실행은 Adapter나
+Host 경계에서 수행합니다. UI는 domain state를 만들지 않고, 받은 상태를 사람에게 읽기 좋게
+보여줍니다.</p>
+              
             </div>
-        </div>
-
-        <footer class="col-md-12">
-            <hr>
-            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
-        </footer>
-        <script src="../../js/bootstrap.bundle.min.js"></script>
-        <script>
-            var base_url = "../..",
-                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
-        </script>
-        <script src="../../js/base.js"></script>
-        <script src="../../search/main.js"></script>
-
-        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="searchModalLabel">Search</h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p>From here you can search these documents. Enter your search terms below.</p>
-                <form>
-                    <div class="form-group">
-                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
-                    </div>
-                </form>
-                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
-            </div>
-            <div class="modal-footer">
-            </div>
-        </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../" class="btn btn-neutral float-left" title="Overview"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../runtime-contracts/" class="btn btn-neutral float-right" title="Runtime Contracts">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
-</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th style="width: 20%;">Keys</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td class="help shortcut"><kbd>?</kbd></td>
-                    <td>Open this help</td>
-                  </tr>
-                  <tr>
-                    <td class="next shortcut"><kbd>n</kbd></td>
-                    <td>Next page</td>
-                  </tr>
-                  <tr>
-                    <td class="prev shortcut"><kbd>p</kbd></td>
-                    <td>Previous page</td>
-                  </tr>
-                  <tr>
-                    <td class="search shortcut"><kbd>s</kbd></td>
-                    <td>Search</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="modal-footer">
-            </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
         </div>
-    </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/tirosh-chain/tirosh-vitalserver" class="fa fa-code-fork" style="color: #fcfcfc"> tirosh-chain/tirosh-vitalserver</a>
+        </span>
+    
+    
+      <span><a href="../" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../runtime-contracts/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
 </div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
 
-    </body>
+</body>
 </html>
