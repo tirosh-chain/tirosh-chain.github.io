@@ -2,58 +2,62 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://tirosh-chain.github.io/vitalserver-helper/</loc>
-         <lastmod>2026-06-15</lastmod>
+         <lastmod>2026-06-22</lastmod>
     </url>
     <url>
          <loc>https://tirosh-chain.github.io/vitalserver-helper/dev/</loc>
-         <lastmod>2026-06-15</lastmod>
+         <lastmod>2026-06-22</lastmod>
     </url>
     <url>
          <loc>https://tirosh-chain.github.io/vitalserver-helper/dev/architecture/</loc>
-         <lastmod>2026-06-15</lastmod>
+         <lastmod>2026-06-22</lastmod>
     </url>
     <url>
          <loc>https://tirosh-chain.github.io/vitalserver-helper/dev/backup-restore-contracts/</loc>
-         <lastmod>2026-06-15</lastmod>
+         <lastmod>2026-06-22</lastmod>
     </url>
     <url>
          <loc>https://tirosh-chain.github.io/vitalserver-helper/dev/delivery-validation/</loc>
-         <lastmod>2026-06-15</lastmod>
+         <lastmod>2026-06-22</lastmod>
+    </url>
+    <url>
+         <loc>https://tirosh-chain.github.io/vitalserver-helper/dev/redis-relay/</loc>
+         <lastmod>2026-06-22</lastmod>
     </url>
     <url>
          <loc>https://tirosh-chain.github.io/vitalserver-helper/dev/repository-map/</loc>
-         <lastmod>2026-06-15</lastmod>
+         <lastmod>2026-06-22</lastmod>
     </url>
     <url>
          <loc>https://tirosh-chain.github.io/vitalserver-helper/dev/runtime-contracts/</loc>
-         <lastmod>2026-06-15</lastmod>
+         <lastmod>2026-06-22</lastmod>
     </url>
     <url>
          <loc>https://tirosh-chain.github.io/vitalserver-helper/release/</loc>
-         <lastmod>2026-06-15</lastmod>
+         <lastmod>2026-06-22</lastmod>
     </url>
     <url>
          <loc>https://tirosh-chain.github.io/vitalserver-helper/release/clean-uninstall/</loc>
-         <lastmod>2026-06-15</lastmod>
+         <lastmod>2026-06-22</lastmod>
     </url>
     <url>
          <loc>https://tirosh-chain.github.io/vitalserver-helper/release/observability-events/</loc>
-         <lastmod>2026-06-15</lastmod>
+         <lastmod>2026-06-22</lastmod>
     </url>
     <url>
          <loc>https://tirosh-chain.github.io/vitalserver-helper/release/reset-installer/</loc>
-         <lastmod>2026-06-15</lastmod>
+         <lastmod>2026-06-22</lastmod>
     </url>
     <url>
          <loc>https://tirosh-chain.github.io/vitalserver-helper/release/runtime-status/</loc>
-         <lastmod>2026-06-15</lastmod>
+         <lastmod>2026-06-22</lastmod>
     </url>
     <url>
          <loc>https://tirosh-chain.github.io/vitalserver-helper/release/scope/</loc>
-         <lastmod>2026-06-15</lastmod>
+         <lastmod>2026-06-22</lastmod>
     </url>
     <url>
          <loc>https://tirosh-chain.github.io/vitalserver-helper/release/usage/</loc>
-         <lastmod>2026-06-15</lastmod>
+         <lastmod>2026-06-22</lastmod>
     </url>
 </urlset>

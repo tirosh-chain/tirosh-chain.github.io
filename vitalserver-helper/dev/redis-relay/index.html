@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://tirosh-chain.github.io/vitalserver-helper/dev/redis-relay/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Redis Relay - Vital Server Helper</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Redis Relay";
+        var mkdocs_page_input_path = "dev/redis-relay.md";
+        var mkdocs_page_url = "/vitalserver-helper/dev/redis-relay/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Vital Server Helper
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Release</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../release/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../release/usage/">Usage</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../release/clean-uninstall/">Clean Uninstall</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../release/reset-installer/">Reset Installer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../release/scope/">Support Scope</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../release/runtime-status/">Runtime Status</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../release/observability-events/">Observability Events</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Dev</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../architecture/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../runtime-contracts/">Runtime Contracts</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../backup-restore-contracts/">Backup/Restore 계약</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../repository-map/">Repository Map</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../delivery-validation/">Delivery & Validation</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Vital Server Helper</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Redis Relay</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/tirosh-chain/tirosh-vitalserver/edit/master/docs/dev/redis-relay.md">Edit on tirosh-chain/tirosh-vitalserver</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="redis-relay">Redis Relay<a class="headerlink" href="#redis-relay" title="Permanent link">&para;</a></h1>
+<p>Redis Relay는 VitalServer 내부 Redis를 외부 network에 직접 열지 않고, Helper-managed runtime이
+allowlisted Redis data를 외부 target Redis로 publish하는 계약입니다.</p>
+<p>이 문서는 target Redis를 소비하는 외부 service가 무엇을 받아야 하고, 어떤 책임을 가져야 하는지
+설명합니다. 특정 Tirosh 내부 구현에 묶인 문서가 아니라, Helper가 공개할 수 있는 generic external
+Redis consumer contract입니다.</p>
+<h2 id="1">1. 목적<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
+<h3 id="1-1">1-1. 해결하는 문제<a class="headerlink" href="#1-1" title="Permanent link">&para;</a></h3>
+<p>실시간 numeric, trend, waveform data는 HTTP API로 polling하기에 크고 빠르게 변합니다. 그러나
+VitalServer raw Redis port를 VM 밖으로 열면 credential/session key, 운영 내부 state, 네트워크 보안
+경계가 함께 노출될 수 있습니다.</p>
+<p>Redis Relay는 VitalServer compose 내부의 source Redis를 read-only로 읽고, operator가 설정한 target
+Redis에 필요한 key와 event만 publish합니다.</p>
+<h3 id="1-2">1-2. 아닌 것<a class="headerlink" href="#1-2" title="Permanent link">&para;</a></h3>
+<ul>
+<li>VitalServer 공식 API가 아닙니다.</li>
+<li>VitalServer raw Redis port를 외부에 공개하는 기능이 아닙니다.</li>
+<li>특정 consumer 구현체 전용 계약이 아닙니다.</li>
+<li>decoded clinical data contract가 아닙니다. Relay payload는 source Redis payload를 보존한 원문
+  snapshot입니다.</li>
+</ul>
+<h2 id="2-runtime-flow">2. Runtime Flow<a class="headerlink" href="#2-runtime-flow" title="Permanent link">&para;</a></h2>
+<h3 id="2-1-source">2-1. Source<a class="headerlink" href="#2-1-source" title="Permanent link">&para;</a></h3>
+<p>Source Redis는 Helper-managed guest compose 내부 Redis입니다.</p>
+<pre><code class="language-text">redis://redis:6379/0
+</code></pre>
+<p>Relay container만 source Redis에 접근합니다. 외부 PC나 Kubernetes service는 source Redis에 직접
+접속하지 않습니다.</p>
+<h3 id="2-2-publisher">2-2. Publisher<a class="headerlink" href="#2-2-publisher" title="Permanent link">&para;</a></h3>
+<p>Publisher는 <code>vitalserver-redis-relay</code> container입니다.</p>
+<p>Publisher는 source Redis에서 <code>SCAN</code>, <code>TYPE</code>, <code>PTTL</code>, <code>DUMP</code>를 사용해 allowlisted key snapshot을
+읽습니다. Source Redis에는 write하지 않습니다.</p>
+<h3 id="2-3-target">2-3. Target<a class="headerlink" href="#2-3-target" title="Permanent link">&para;</a></h3>
+<p>Target Redis는 Helper Advanced의 Redis relay 설정으로 지정합니다.</p>
+<p>Target URL은 macOS Helper process 기준 주소가 아니라 guest relay container 기준 주소입니다. 예를 들어
+Mac host에서 Redis를 <code>16381</code> port로 열고 shared NAT guest에서 접근한다면 보통 아래 주소를 사용합니다.</p>
+<pre><code class="language-text">redis://192.168.64.1:16381/0
+</code></pre>
+<h2 id="3-target-redis-output">3. Target Redis Output<a class="headerlink" href="#3-target-redis-output" title="Permanent link">&para;</a></h2>
+<h3 id="3-1-restored-keys">3-1. Restored keys<a class="headerlink" href="#3-1-restored-keys" title="Permanent link">&para;</a></h3>
+<p>Relay는 allowlisted source key를 target Redis에 아래 prefix로 restore합니다.</p>
+<pre><code class="language-text">vitalserver:&lt;source-key&gt;
+</code></pre>
+<p>예를 들어 source key가 <code>beds</code>이면 target key는 <code>vitalserver:beds</code>입니다.</p>
+<h3 id="3-2-event-stream">3-2. Event stream<a class="headerlink" href="#3-2-event-stream" title="Permanent link">&para;</a></h3>
+<p>Relay는 target Redis stream에 metadata event를 publish합니다.</p>
+<pre><code class="language-text">vitalserver:relay:events
+</code></pre>
+<p>Consumer는 이 stream을 Redis Streams consumer group으로 읽고, event의 <code>target_key</code>를 다시 target
+Redis에서 fetch합니다. Redis value 자체는 stream event에 넣지 않습니다.</p>
+<h3 id="3-3-metadata-keys">3-3. Metadata keys<a class="headerlink" href="#3-3-metadata-keys" title="Permanent link">&para;</a></h3>
+<p>Relay는 publish idempotency와 change detection을 위해 아래 metadata key를 사용합니다.</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>vitalserver:relay:fingerprints</code></td>
+<td>target key별 source DUMP fingerprint</td>
+</tr>
+<tr>
+<td><code>vitalserver:relay:published</code></td>
+<td>publish dedupe key별 stream event id</td>
+</tr>
+</tbody>
+</table>
+<p>Consumer는 이 metadata를 자신의 processing state로 사용하지 않습니다. Consumer의 pending recovery,
+DLQ, downstream idempotency state는 consumer가 별도로 소유합니다.</p>
+<h2 id="4-protocol-v1-event">4. Protocol v1 Event<a class="headerlink" href="#4-protocol-v1-event" title="Permanent link">&para;</a></h2>
+<h3 id="4-1-event-name">4-1. Event name<a class="headerlink" href="#4-1-event-name" title="Permanent link">&para;</a></h3>
+<p>Relay Protocol v1 event name은 아래 값입니다.</p>
+<pre><code class="language-text">key_published
+</code></pre>
+<h3 id="4-2-required-fields">4-2. Required fields<a class="headerlink" href="#4-2-required-fields" title="Permanent link">&para;</a></h3>
+<p><code>vitalserver:relay:events</code> entry는 아래 field를 포함합니다.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>schema_version</code></td>
+<td>protocol schema version. 현재 <code>1</code></td>
+</tr>
+<tr>
+<td><code>event</code></td>
+<td>event name. 현재 <code>key_published</code></td>
+</tr>
+<tr>
+<td><code>source_key</code></td>
+<td>source Redis key</td>
+</tr>
+<tr>
+<td><code>target_key</code></td>
+<td>target Redis key</td>
+</tr>
+<tr>
+<td><code>key_type</code></td>
+<td>source Redis key type</td>
+</tr>
+<tr>
+<td><code>ttl_ms</code></td>
+<td>source key PTTL. no-expiry는 <code>0</code> restore semantics로 publish</td>
+</tr>
+<tr>
+<td><code>source_fingerprint</code></td>
+<td>source DUMP payload SHA-256</td>
+</tr>
+<tr>
+<td><code>dedupe_key</code></td>
+<td>동일 source snapshot publish dedupe key</td>
+</tr>
+<tr>
+<td><code>published_at</code></td>
+<td>publisher가 event를 기록한 UTC timestamp</td>
+</tr>
+<tr>
+<td><code>publisher</code></td>
+<td>publisher id. 기본 <code>vitalserver-helper-relay</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="4-3-atomicity">4-3. Atomicity<a class="headerlink" href="#4-3-atomicity" title="Permanent link">&para;</a></h3>
+<p>Publisher는 target key restore, fingerprint update, publish dedupe 기록, stream event publish를 하나의
+Lua script 안에서 처리합니다.</p>
+<p>Consumer는 <code>key_published</code> event를 읽었을 때 <code>target_key</code> payload가 이미 target Redis에 존재한다고
+기대할 수 있습니다. 다만 target Redis TTL 때문에 consumer가 늦게 읽으면 payload가 만료될 수 있으므로,
+missing payload는 정상 empty가 아니라 별도 failure/retry/DLQ 정책으로 다룹니다.</p>
+<h2 id="5-responsibility-boundary">5. Responsibility Boundary<a class="headerlink" href="#5-responsibility-boundary" title="Permanent link">&para;</a></h2>
+<h3 id="5-1-helper-owns">5-1. Helper owns<a class="headerlink" href="#5-1-helper-owns" title="Permanent link">&para;</a></h3>
+<p>Helper와 <code>vitalserver-redis-relay</code>가 소유하는 책임은 아래입니다.</p>
+<ul>
+<li>source Redis read-only 접근</li>
+<li>allowlist/denylist policy</li>
+<li>target Redis connection 설정</li>
+<li>target key restore</li>
+<li>atomic publish</li>
+<li>publish progress/status document</li>
+<li>credential/session/auth key relay 차단</li>
+</ul>
+<h3 id="5-2-consumer-owns">5-2. Consumer owns<a class="headerlink" href="#5-2-consumer-owns" title="Permanent link">&para;</a></h3>
+<p>Target-side consumer가 소유하는 책임은 아래입니다.</p>
+<ul>
+<li>Redis Streams consumer group 생성</li>
+<li>pending entry recovery</li>
+<li>decode 실패 DLQ</li>
+<li>duplicate event handling</li>
+<li>decoded event idempotency</li>
+<li>downstream database/message/callback write idempotency</li>
+<li>consumer-specific monitoring and alerting</li>
+</ul>
+<p>Helper는 consumer group pending state를 추측하거나 복구하지 않습니다. Consumer가 어떤 sink를 쓰는지,
+어떤 decode schema를 적용하는지, 어떤 retry policy를 쓰는지는 target-side system의 책임입니다.</p>
+<h2 id="6-consumer-guidance">6. Consumer Guidance<a class="headerlink" href="#6-consumer-guidance" title="Permanent link">&para;</a></h2>
+<h3 id="6-1-recommended-flow">6-1. Recommended flow<a class="headerlink" href="#6-1-recommended-flow" title="Permanent link">&para;</a></h3>
+<p>Consumer는 아래 흐름을 권장합니다.</p>
+<ol>
+<li><code>XGROUP CREATE vitalserver:relay:events &lt;group&gt; $ MKSTREAM</code>으로 consumer group을 준비합니다.</li>
+<li><code>XREADGROUP GROUP &lt;group&gt; &lt;consumer&gt; STREAMS vitalserver:relay:events &gt;</code>로 새 event를 읽습니다.</li>
+<li><code>event == key_published</code>인지 확인합니다.</li>
+<li><code>target_key</code>를 target Redis에서 fetch합니다.</li>
+<li>payload를 decode하거나 downstream 형식으로 변환합니다.</li>
+<li>downstream write를 idempotent하게 수행합니다.</li>
+<li>성공한 event만 <code>XACK</code>합니다.</li>
+</ol>
+<h3 id="6-2-failure-handling">6-2. Failure handling<a class="headerlink" href="#6-2-failure-handling" title="Permanent link">&para;</a></h3>
+<p>Consumer는 happy path만 처리하면 안 됩니다.</p>
+<table>
+<thead>
+<tr>
+<th>상황</th>
+<th>권장 처리</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>target payload missing</td>
+<td>retry 또는 DLQ. empty success로 처리하지 않음</td>
+</tr>
+<tr>
+<td>decode 실패</td>
+<td>원본 event id, target key, error code를 DLQ에 기록 후 ack 여부를 policy로 결정</td>
+</tr>
+<tr>
+<td>consumer crash</td>
+<td><code>XPENDING</code>, <code>XAUTOCLAIM</code> 또는 <code>XCLAIM</code>으로 pending event 복구</td>
+</tr>
+<tr>
+<td>duplicate event</td>
+<td><code>dedupe_key</code> 또는 downstream idempotency key로 중복 처리 방지</td>
+</tr>
+<tr>
+<td>downstream write 실패</td>
+<td>ack하지 않고 retry하거나 DLQ로 이동</td>
+</tr>
+</tbody>
+</table>
+<h3 id="6-3-event-name-policy">6-3. Event name policy<a class="headerlink" href="#6-3-event-name-policy" title="Permanent link">&para;</a></h3>
+<p>Protocol v1의 event name은 <code>key_published</code> 하나입니다. Consumer는 다른 event name을 호환 alias로
+처리하지 않습니다. 새 event name이 필요하면 protocol version 또는 event contract를 명시적으로 변경합니다.</p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/tirosh-chain/tirosh-vitalserver" class="fa fa-code-fork" style="color: #fcfcfc"> tirosh-chain/tirosh-vitalserver</a>
+        </span>
+    
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
